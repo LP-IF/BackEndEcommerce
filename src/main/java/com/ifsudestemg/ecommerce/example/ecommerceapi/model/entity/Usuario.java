@@ -14,7 +14,6 @@ import javax.persistence.*;
 public class Usuario {
 
     private Integer telefone;
-    private Integer senha;
     private String email;
     private String senha;
 
