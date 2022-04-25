@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Fornecedorpf {
+public class Fornecedorpf extends Fornecedor {
     private Date dataNascimento;
     private String cpf;
 
