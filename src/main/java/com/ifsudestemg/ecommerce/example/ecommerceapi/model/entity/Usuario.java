@@ -22,6 +22,5 @@ public class Usuario {
     @ManyToOne
     private Endereco endereco;
 
-    @OneToOne
-    private Administrador administrador;
+
 }
