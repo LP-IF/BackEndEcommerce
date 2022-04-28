@@ -18,6 +18,5 @@ public class Fornecedorpj extends Fornecedor {
     private String emailRepres;
     private Integer telRepres;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Fornecedor fornecedor;
+
 }

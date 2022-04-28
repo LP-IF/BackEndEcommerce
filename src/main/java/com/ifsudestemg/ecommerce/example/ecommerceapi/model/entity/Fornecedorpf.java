@@ -16,6 +16,4 @@ public class Fornecedorpf extends Fornecedor {
     private Date dataNascimento;
     private String cpf;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Fornecedor fornecedor;
 }
