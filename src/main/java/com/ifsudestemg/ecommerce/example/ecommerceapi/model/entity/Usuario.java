@@ -6,17 +6,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedSuperclass
 
 public class Usuario {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idUsuario;
     private Integer telefone;
     private String email;
     private String senha;
 
     @ManyToOne
     private Endereco endereco;
+
+    @OneToOne
+    private Administrador administrador;
 }
