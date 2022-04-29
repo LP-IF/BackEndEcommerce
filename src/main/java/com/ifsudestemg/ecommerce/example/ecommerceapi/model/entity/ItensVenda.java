@@ -17,7 +17,7 @@ public class ItensVenda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idItensVenda;
     private String nomeProduto;
-    private Double precoUnid;
+    private Double precoUnit;
     private Double precoTotal;
     private Integer quant;
 }
