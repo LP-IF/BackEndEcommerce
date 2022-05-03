@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -17,13 +14,23 @@ import javax.persistence.Id;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idProduto;
     private String nomeProduto;
     private String especificacoes;
-    private double preco;
-    private int qtdEstoque;
-    private int estoqueMin;
-    private int estoqueMax;
-    private int pontoRessupri;
+    private Double preco;
+    private Integer qtdEstoque;
+    private Integer estoqueMin;
+    private Integer estoqueMax;
+    private Integer pontoRessupri;
+
+    @OneToMany
+    private Categoria categoria;
+
+    @OneToMany
+    private Tamanho tamanho;
+
+    @OneToMany
+    private Cor cor;
 
 }

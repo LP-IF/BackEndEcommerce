@@ -20,4 +20,5 @@ public class ItensCarrinho {
     private Double precoUnit;
     private Double precoTotal;
     private Integer quant;
+
 }

@@ -22,4 +22,7 @@ public class Venda {
     private String notaFiscal;
     private Integer numeroPedido;
     private Date dataVenda;
+
+    @OneToOne
+    private ItensVenda itensVenda;
 }

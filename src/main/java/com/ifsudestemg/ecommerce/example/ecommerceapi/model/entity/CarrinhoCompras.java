@@ -6,19 +6,29 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class ItensCompra {
+public class CarrinhoCompras {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItensCompra;
-    private Double custoUnit;
-    private Double custoTotal;
-    private Integer quant;
+    private Long idCarrinhoCompras;
+    private Integer qtdProduto;
+    private Boolean freteGratis;
+    private Float total;
+    private Double precoFrete;
 
     @OneToMany
-    private Produto produto;
+    private Cupom cupom;
+
+    @OneToMany
+    private ItensCarrinho itensCarrinho;
+
+    @OneToOne
+    private Pagamento pagamento;
+
 }

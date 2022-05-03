@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
 
-public class Fornecedor extends Usuario{
-
-    @OneToMany
-    private CompraProduto compraProduto;
+public class Cupom {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idCupom;
+    private Double porcentagem;
 }
