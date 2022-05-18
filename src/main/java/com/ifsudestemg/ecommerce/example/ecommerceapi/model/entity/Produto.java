@@ -19,18 +19,8 @@ public class Produto {
     private String nomeProduto;
     private String especificacoes;
     private Double preco;
-    private Integer qtdEstoque;
-    private Integer estoqueMin;
-    private Integer estoqueMax;
-    private Integer pontoRessupri;
 
-    @OneToMany
-    private Categoria categoria;
-
-    @OneToMany
-    private Tamanho tamanho;
-
-    @OneToMany
-    private Cor cor;
+    @ManyToOne
+    private Estoque estoque;
 
 }

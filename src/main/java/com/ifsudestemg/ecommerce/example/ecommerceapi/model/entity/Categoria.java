@@ -16,4 +16,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
     private String nome;
+
+    @ManyToOne
+    private Produto produto;
 }

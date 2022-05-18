@@ -19,7 +19,7 @@ public class Cliente extends Usuario {
     @OneToMany
     private Cartao cartao;
 
-    @OneToMany
+    @OneToOne
     private CarrinhoCompras carrinhoCompras;
 
     @OneToMany

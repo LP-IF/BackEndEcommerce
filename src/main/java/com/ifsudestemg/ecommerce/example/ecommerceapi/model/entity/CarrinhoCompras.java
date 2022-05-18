@@ -22,7 +22,7 @@ public class CarrinhoCompras {
     private Float total;
     private Double precoFrete;
 
-    @OneToMany
+    @ManyToOne
     private Cupom cupom;
 
     @OneToMany

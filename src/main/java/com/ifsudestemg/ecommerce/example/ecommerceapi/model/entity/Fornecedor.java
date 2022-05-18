@@ -13,6 +13,4 @@ import javax.persistence.*;
 
 public class Fornecedor extends Usuario{
 
-    @OneToMany
-    private CompraProduto compraProduto;
 }

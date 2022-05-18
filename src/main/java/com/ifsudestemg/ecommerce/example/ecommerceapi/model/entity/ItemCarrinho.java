@@ -5,20 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class ItensCompra {
+public class ItemCarrinho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItensCompra;
-    private Double custoUnit;
-    private Double custoTotal;
-    private Integer quant;
+    private Long idItensCarrinho;
+    private Double precoTotal;
+    private Integer quantidade;
 
-    @OneToMany
+    @ManyToOne
     private Produto produto;
 }

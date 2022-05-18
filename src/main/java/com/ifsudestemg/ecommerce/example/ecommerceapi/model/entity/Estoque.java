@@ -11,9 +11,15 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Tamanho {
+public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTamanho;
+    private Long id;
+    private Integer quantidadeEstoque;
+    private Integer estoqueMinimo;
+    private Integer estoqueMaximo;
+    private Integer pontoRessuprimento;
     private String tamanho;
+    private String cor;
+
 }

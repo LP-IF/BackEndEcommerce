@@ -12,21 +12,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 
-public class ItensVenda {
+public class ItemVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idItensVenda;
-    //private String nomeProduto;  ->mudar no diagrama
     private Double precoUnit;
     private Double precoTotal;
     private Integer quant;
 
     @OneToOne
-    private ItensCarrinho itensCarrinho;
+    private ItemCarrinho itensCarrinho;
 
     @OneToOne
     private Pagamento pagamento;
 
-    @OneToMany
+    @ManyToOne
     private Produto produto;
 }

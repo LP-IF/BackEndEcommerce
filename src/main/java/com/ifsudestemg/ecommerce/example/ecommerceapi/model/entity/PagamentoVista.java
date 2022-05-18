@@ -13,5 +13,5 @@ import javax.persistence.*;
 
 public class PagamentoVista extends Pagamento{
 
-    private Double desconto; //mudar no diagrama
+    private Double desconto;
 }

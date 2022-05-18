@@ -5,18 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Fornecedorpj extends Fornecedor {
-    private String cnpj;
-    private String nomeRepres;
-    private String cpfRepres;
-    private String emailRepres;
-    private Integer telRepres;
+public class FornecedorPessoaFisica extends Fornecedor {
 
+    private Date dataNascimento;
+    private String cpf;
 
 }
