@@ -11,13 +11,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-
-public class ItensVenda {
+public class Cupom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItensVenda;
-    private String nomeProduto;
-    private Double precoUnit;
-    private Double precoTotal;
-    private Integer quant;
+    private Long idCupom;
+    private Double porcentagem;
 }

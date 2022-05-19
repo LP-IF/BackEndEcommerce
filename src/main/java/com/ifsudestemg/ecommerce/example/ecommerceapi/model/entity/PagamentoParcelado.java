@@ -11,10 +11,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class PagamentoParcelado {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long PagamentoParcelado;
+public class PagamentoParcelado extends Pagamento{
+
     private Integer parcelas;
     private Double juros;
 }

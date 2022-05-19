@@ -11,9 +11,8 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Administrador {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Administrador extends Usuario{
+
     private Long idAdministrador;
     private Date dataNascimento;
     private String cpf;

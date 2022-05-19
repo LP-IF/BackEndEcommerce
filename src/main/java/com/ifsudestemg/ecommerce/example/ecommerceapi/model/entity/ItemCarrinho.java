@@ -6,17 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Fornecedorpj extends Fornecedor {
-    private String cnpj;
-    private String nomeRepres;
-    private String cpfRepres;
-    private String emailRepres;
-    private Integer telRepres;
+public class ItemCarrinho {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idItensCarrinho;
+    private Double precoTotal;
+    private Integer quantidade;
 
-
+    @ManyToOne
+    private Produto produto;
 }

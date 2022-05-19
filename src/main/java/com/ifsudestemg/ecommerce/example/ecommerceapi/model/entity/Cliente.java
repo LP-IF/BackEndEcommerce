@@ -15,4 +15,13 @@ import java.util.Date;
 public class Cliente extends Usuario {
     private Date dataNascimento;
     private String cpf;
+
+    @OneToMany
+    private Cartao cartao;
+
+    @OneToOne
+    private CarrinhoCompras carrinhoCompras;
+
+    @OneToMany
+    private Venda venda;
 }

@@ -11,9 +11,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @MappedSuperclass
 
-public class Fornecedor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Fornecedor extends Usuario{
 
 }

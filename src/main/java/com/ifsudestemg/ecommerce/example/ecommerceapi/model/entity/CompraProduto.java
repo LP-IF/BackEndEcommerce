@@ -15,6 +15,11 @@ import java.util.Date;
 public class CompraProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long idCompraProduto;
-    private Date diaDeEntrega;
+    private Date dataEntrega;
+    private Double custoTotal;
+
+    @ManyToOne
+    private Fornecedor fornecedor;
 }

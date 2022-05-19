@@ -11,9 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Cor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCor;
-    private String cor;
+public class FornecedorPessoaJuridica extends Fornecedor {
+    private String cnpj;
+    private String nomeRepresentante;
+    private String cpfRepresentante;
+    private String emailRepresentante;
+    private Integer telRepresentante;
+
+
 }

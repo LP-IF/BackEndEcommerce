@@ -11,8 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class PagamentoVista {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idPagamentoVista;
+public class PagamentoVista extends Pagamento{
+
+    private Double desconto;
 }

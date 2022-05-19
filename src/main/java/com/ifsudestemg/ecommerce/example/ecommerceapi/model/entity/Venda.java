@@ -18,8 +18,11 @@ public class Venda {
     private Long idVendas;
     private String estado;
     private Integer estrelasAvaliacao;
-    private String comentAvaliacao;
-    private String notaFiscal;
+    private String comentarioAvaliacao;
     private Integer numeroPedido;
     private Date dataVenda;
+    private Date dataEntrega;
+
+    @OneToOne
+    private ItemVenda itemVenda;
 }

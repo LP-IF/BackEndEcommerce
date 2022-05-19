@@ -5,15 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Fornecedorpf extends Fornecedor {
-    private Date dataNascimento;
-    private String cpf;
+public class ItemCompra {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idItensCompra;
+    private Double custoUnit;
+    private Integer quantidade;
 
+    @ManyToOne
+    private Produto produto;
 }

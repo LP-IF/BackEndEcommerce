@@ -5,15 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Tamanho {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTamanho;
-    private String tamanho;
+public class FornecedorPessoaFisica extends Fornecedor {
+
+    private Date dataNascimento;
+    private String cpf;
+
 }

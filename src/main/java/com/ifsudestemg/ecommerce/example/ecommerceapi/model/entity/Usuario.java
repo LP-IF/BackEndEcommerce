@@ -19,8 +19,5 @@ public class Usuario {
     private String email;
     private String senha;
 
-    @ManyToOne
-    private Endereco endereco;
-
 
 }
