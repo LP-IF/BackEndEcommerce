@@ -21,5 +21,6 @@ public class Cartao {
     private Date validade;
     private String cvv;
 
-
+    @ManyToOne
+    private Cliente cliente;
 }

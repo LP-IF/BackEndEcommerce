@@ -21,4 +21,7 @@ public class ItemCarrinho {
 
     @ManyToOne
     private Produto produto;
+
+    @ManyToOne
+    private CarrinhoCompras carrinhoCompras;
 }
