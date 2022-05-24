@@ -35,12 +35,12 @@ public class AdministradorService {
 
     @Transactional
     public void excluir(Administrador administrador) {
-        Objects.requireNonNull(administrador.getIdAdministrador());
+        Objects.requireNonNull(administrador.getId());
         repository.delete(administrador);
     }
 
     public void validar(Administrador administrador) {
-        if (administrador.getIdAdministrador() == null || administrador.getIdAdministrador() == 0) {
+        if (administrador.getId() == null || administrador.getId() == 0) {
             throw new RegraNegocioException("Administrador inválido");
         }
         if (administrador.getDataNascimento() == null){
