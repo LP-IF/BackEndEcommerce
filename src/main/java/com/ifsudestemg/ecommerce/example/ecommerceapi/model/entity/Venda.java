@@ -23,6 +23,6 @@ public class Venda {
     private Date dataVenda;
     private Date dataEntrega;
 
-    @OneToOne
-    private ItemVenda itemVenda;
+    @ManyToOne
+    private Cliente cliente;
 }

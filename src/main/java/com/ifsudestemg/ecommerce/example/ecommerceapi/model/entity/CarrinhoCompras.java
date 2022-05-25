@@ -25,9 +25,6 @@ public class CarrinhoCompras {
     @ManyToOne
     private Cupom cupom;
 
-    @OneToMany
-    private ItensCarrinho itensCarrinho;
-
     @OneToOne
     private Pagamento pagamento;
 
