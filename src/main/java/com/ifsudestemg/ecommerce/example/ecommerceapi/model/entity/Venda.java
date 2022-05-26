@@ -15,7 +15,7 @@ import java.util.Date;
 public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVendas;
+    private Long Id;
     private String estado;
     private Integer estrelasAvaliacao;
     private String comentarioAvaliacao;

@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class ItemVenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItensVenda;
+    private Long Id;
     private Double precoUnit;
     private Double precoTotal;
     private Integer quant;

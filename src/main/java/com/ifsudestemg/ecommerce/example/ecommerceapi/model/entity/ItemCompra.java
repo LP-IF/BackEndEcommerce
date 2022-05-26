@@ -12,9 +12,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 public class ItemCompra {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItensCompra;
+    private Long Id;
     private Double custoUnit;
     private Integer quantidade;
 
