@@ -15,7 +15,7 @@ import java.util.Date;
 public class Cartao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCartao;
+    private Long Id;
     private String nomeTitular;
     private Integer numCartao;
     private Date validade;

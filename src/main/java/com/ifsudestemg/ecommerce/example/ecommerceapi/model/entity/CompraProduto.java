@@ -16,7 +16,7 @@ public class CompraProduto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private Long idCompraProduto;
+    private Long Id;
     private Date dataEntrega;
     private Double custoTotal;
 

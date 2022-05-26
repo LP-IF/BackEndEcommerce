@@ -52,5 +52,14 @@ public class ItemVendaService {
         if (itemVenda.getQuant() == null || itemVenda.getQuant() == 0) {
             throw new RegraNegocioException("Quantidade inválida");
         }
+        if (itemVenda.getPagamento() == null) {
+            throw new RegraNegocioException("Pagamento inválida");
+        }
+        if (itemVenda.getProduto() == null) {
+            throw new RegraNegocioException("Produto inválida");
+        }
+        if (itemVenda.getVenda() == null) {
+            throw new RegraNegocioException("Venda inválida");
+        }
     }
 }

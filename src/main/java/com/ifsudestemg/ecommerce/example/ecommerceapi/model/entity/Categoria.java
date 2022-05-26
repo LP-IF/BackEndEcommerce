@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long Id;
     private String nome;
 
     @ManyToOne

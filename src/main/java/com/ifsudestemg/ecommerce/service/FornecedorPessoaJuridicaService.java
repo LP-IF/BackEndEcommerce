@@ -46,5 +46,14 @@ public class FornecedorPessoaJuridicaService {
         if (fornecedorPessoaJuridica.getCnpj() == null || fornecedorPessoaJuridica.getCnpj().trim().equals("")) {
             throw new RegraNegocioException("CNPJ inválido");
         }
+        if (fornecedorPessoaJuridica.getNomeRepresentante() == null || fornecedorPessoaJuridica.getNomeRepresentante().trim().equals("")) {
+            throw new RegraNegocioException("Nome inválido");
+        }
+        if (fornecedorPessoaJuridica.getEmailRepresentante() == null || fornecedorPessoaJuridica.getEmailRepresentante().trim().equals("")) {
+            throw new RegraNegocioException("Email inválido");
+        }
+        if (fornecedorPessoaJuridica.getSenha() == null || fornecedorPessoaJuridica.getSenha().trim().equals("")) {
+            throw new RegraNegocioException("Senha inválida");
+        }
     }
 }
