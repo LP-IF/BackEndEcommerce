@@ -43,9 +43,6 @@ public class AdministradorService {
         if (administrador.getId() == null || administrador.getId() == 0) {
             throw new RegraNegocioException("Administrador inválido");
         }
-        if (administrador.getDataNascimento() == null){
-            throw new RegraNegocioException("Data de Nascimento inválida");
-        }
         if (administrador.getCpf() == null || administrador.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");
         }
