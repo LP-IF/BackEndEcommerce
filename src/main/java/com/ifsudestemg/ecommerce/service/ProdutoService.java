@@ -52,5 +52,8 @@ public class ProdutoService {
         if (produto.getPreco() == null || produto.getPreco() == 0) {
             throw new RegraNegocioException("Preço inválido");
         }
+        if (produto.getEstoque() == null) {
+            throw new RegraNegocioException("Estoque inválido");
+        }
     }
 }

@@ -43,6 +43,15 @@ public class FornecedorPessoaFisicaService {
         if (fornecedorPessoaFisica.getId() == null || fornecedorPessoaFisica.getId() == 0) {
             throw new RegraNegocioException("Fornecedor Pessoa Física inválido");
         }
+        if (fornecedorPessoaFisica.getNome() == null || fornecedorPessoaFisica.getNome().trim().equals("")) {
+            throw new RegraNegocioException("Nome inválido");
+        }
+        if (fornecedorPessoaFisica.getEmail() == null || fornecedorPessoaFisica.getEmail().trim().equals("")) {
+            throw new RegraNegocioException("Email inválido");
+        }
+        if (fornecedorPessoaFisica.getSenha() == null || fornecedorPessoaFisica.getSenha().trim().equals("")) {
+            throw new RegraNegocioException("Senha inválida");
+        }
         if (fornecedorPessoaFisica.getCpf() == null || fornecedorPessoaFisica.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");
         }

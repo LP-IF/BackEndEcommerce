@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.service;
 
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cliente;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.ClienteRepository;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +42,15 @@ public class ClienteService {
     public void validar(Cliente cliente) {
         if (cliente.getId() == null || cliente.getId() == 0) {
             throw new RegraNegocioException("Cliente inválido");
+        }
+        if (cliente.getNome() == null || cliente.getNome().trim().equals("")) {
+            throw new RegraNegocioException("Nome inválido");
+        }
+        if (cliente.getEmail() == null || cliente.getEmail().trim().equals("")) {
+            throw new RegraNegocioException("Email inválido");
+        }
+        if (cliente.getSenha() == null || cliente.getSenha().trim().equals("")) {
+            throw new RegraNegocioException("Senha inválido");
         }
         if (cliente.getCpf() == null || cliente.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");

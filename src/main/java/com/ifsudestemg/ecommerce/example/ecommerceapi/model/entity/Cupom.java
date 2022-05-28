@@ -14,6 +14,6 @@ import javax.persistence.*;
 public class Cupom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     private Double porcentagem;
 }

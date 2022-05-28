@@ -43,11 +43,17 @@ public class CartaoService {
         if (cartao.getId() == null || cartao.getId() == 0) {
             throw new RegraNegocioException("Administrador inválido");
         }
-        if (cartao.getNumCartao() == null){
+        if (cartao.getNomeTitular() == null || cartao.getNomeTitular().trim().equals("")) {
+            throw new RegraNegocioException("Nome titular inválido");
+        }
+        if (cartao.getNumCartao() == null || cartao.getNumCartao() == 0){
             throw new RegraNegocioException("Número do cartão inválida");
         }
         if (cartao.getCvv() == null || cartao.getCvv().trim().equals("")) {
             throw new RegraNegocioException("CVV inválido");
+        }
+        if (cartao.getCliente() == null){
+            throw new RegraNegocioException("Cliente inválido");
         }
     }
 }

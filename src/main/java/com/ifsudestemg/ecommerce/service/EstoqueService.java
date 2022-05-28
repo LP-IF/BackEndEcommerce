@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.service;
 
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Estoque;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.EstoqueRepository;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +15,7 @@ public class EstoqueService {
 
     private EstoqueRepository repository;
 
-    public AdministradorService(EstoqueRepository repository) {
+    public EstoqueService(EstoqueRepository repository) {
         this.repository = repository;
     }
 
@@ -43,8 +43,17 @@ public class EstoqueService {
         if (estoque.getId() == null || estoque.getId() == 0) {
             throw new RegraNegocioException("Estoque inválido");
         }
-        if (estoque.getTamanho() == null || estoque.getTamanho().trim().equals("")) {
-            throw new RegraNegocioException("Tamanho inválido");
+        if (estoque.getQuantidadeEstoque() == null) {
+            throw new RegraNegocioException("Quantidade do estoque inválido");
+        }
+        if (estoque.getEstoqueMinimo() == null) {
+            throw new RegraNegocioException("Estoque Mínimo inválido");
+        }
+        if (estoque.getEstoqueMaximo() == null) {
+            throw new RegraNegocioException("Estoque Maximo inválido");
+        }
+        if (estoque.getPontoRessuprimento() == null) {
+            throw new RegraNegocioException("Ponto de ressuprimento inválido");
         }
     }
 }

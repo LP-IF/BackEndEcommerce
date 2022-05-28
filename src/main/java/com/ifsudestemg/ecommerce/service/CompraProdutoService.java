@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.service;
 
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.CompraProduto;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.CompraProdutoRepository;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,23 +28,30 @@ public class CompraProdutoService {
     }
 
     @Transactional
-    public CompraProduto salvar(CompraProduto compraproduto) {
-        validar(compraproduto);
-        return repository.save(compraproduto);
+    public CompraProduto salvar(CompraProduto compraProduto) {
+        validar(compraProduto);
+        return repository.save(compraProduto);
     }
 
     @Transactional
-    public void excluir(CompraProduto compraproduto) {
-        Objects.requireNonNull(compraproduto.getId());
-        repository.delete(compraproduto);
+    public void excluir(CompraProduto compraProduto) {
+        Objects.requireNonNull(compraProduto.getId());
+        repository.delete(compraProduto);
     }
 
-    public void validar(CompraProduto compraproduto) {
-        if (compraproduto.getId() == null || compraproduto.getId() == 0) {
-            throw new RegraNegocioException("Administrador inválido");
+    public void validar(CompraProduto compraProduto) {
+        if (compraProduto.getId() == null || compraProduto.getId() == 0) {
+            throw new RegraNegocioException("Compra produto inválido");
         }
-        if (compraproduto.getDataEntrega() == null || compraproduto.getDataEntrega().equals("")) {
+        if (compraProduto.getDataEntrega() == null || compraProduto.getDataEntrega().equals("")) {
             throw new RegraNegocioException("Data de entrega inválida");
         }
+        if (compraProduto.getCustoTotal() == null || compraProduto.getCustoTotal() == 0) {
+            throw new RegraNegocioException("Custo total inválido");
+        }
+        if (compraProduto.getFornecedor() == null) {
+            throw new RegraNegocioException("Fornecedor inválida");
+        }
+
     }
 }

@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.service;
 
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cupom;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.CupomRepository;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +43,7 @@ public class CupomService {
         if (cupom.getId() == null || cupom.getId() == 0) {
             throw new RegraNegocioException("Cupom inválido");
         }
-        if (cupom.getPorcentagem() == null || cupom.getPorcentagem().equals("")) {
+        if (cupom.getPorcentagem() == null || cupom.getPorcentagem() == 0) {
             throw new RegraNegocioException("Porcentagem inválido");
         }
     }
