@@ -6,10 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-
+@Entity
 @Data
 @AllArgsConstructor
-@MappedSuperclass
 
 public class Fornecedor extends Usuario{
 
