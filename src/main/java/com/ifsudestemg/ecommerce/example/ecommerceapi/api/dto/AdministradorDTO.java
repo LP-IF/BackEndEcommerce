@@ -1,6 +1,7 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Administrador;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
