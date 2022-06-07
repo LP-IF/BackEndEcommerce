@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ClienteDTO {
     private Long id;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
 
     private String nome;

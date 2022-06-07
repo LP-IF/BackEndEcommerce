@@ -13,6 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class Administrador extends Usuario{
 
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
 }

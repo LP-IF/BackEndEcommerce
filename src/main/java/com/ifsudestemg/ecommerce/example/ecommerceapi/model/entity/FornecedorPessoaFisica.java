@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class FornecedorPessoaFisica extends Fornecedor {
 
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
 
 }

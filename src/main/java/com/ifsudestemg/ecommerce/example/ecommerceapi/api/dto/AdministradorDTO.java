@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class AdministradorDTO {
     private Long id;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
     private String nome;
     private Integer telefone;

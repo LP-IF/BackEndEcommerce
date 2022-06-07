@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class FornecedorPessoaFisicaDTO {
     private Long id;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
     private String nome;
     private Integer telefone;

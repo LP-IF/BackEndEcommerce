@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class Cliente extends Usuario {
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
 
     @OneToOne
