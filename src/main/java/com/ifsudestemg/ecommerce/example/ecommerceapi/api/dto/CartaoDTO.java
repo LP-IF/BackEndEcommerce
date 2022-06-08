@@ -19,7 +19,7 @@ public class CartaoDTO {
     private Date validade;
     private String cvv;
 
-    private Date dataNascimento;
+    private String dataNascimento;
     private String cpf;
 
     private Long idCliente;

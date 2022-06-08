@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class AdministradorDTO {
-    private Long id;
+    private Long Id;
     private String dataNascimento;
     private String cpf;
     private String nome;

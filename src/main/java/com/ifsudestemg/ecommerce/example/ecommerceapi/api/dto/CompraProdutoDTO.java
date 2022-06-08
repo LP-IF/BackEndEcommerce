@@ -18,7 +18,7 @@ public class CompraProdutoDTO {
     private Date dataEntrega;
     private Double custoTotal;
 
-    private Long idFuncionario;
+    private Long IdFornecedor;
     private String nome;
     private Integer telefone;
     private String email;
@@ -26,7 +26,7 @@ public class CompraProdutoDTO {
     public static CompraProdutoDTO create(CompraProduto compraProduto) {
         ModelMapper modelMapper = new ModelMapper();
         CompraProdutoDTO dto = modelMapper.map(compraProduto, CompraProdutoDTO.class);
-        dto.idFuncionario = compraProduto.getFornecedor().getId();
+        dto.IdFornecedor = compraProduto.getFornecedor().getId();
         dto.nome = compraProduto.getFornecedor().getNome();
         dto.telefone = compraProduto.getFornecedor().getTelefone();
         dto.email = compraProduto.getFornecedor().getEmail();

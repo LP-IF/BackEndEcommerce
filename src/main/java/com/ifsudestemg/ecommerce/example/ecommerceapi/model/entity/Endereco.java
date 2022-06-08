@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

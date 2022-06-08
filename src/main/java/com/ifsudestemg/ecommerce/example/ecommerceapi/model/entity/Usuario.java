@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
     private String nome;
     private Integer telefone;
     private String email;
