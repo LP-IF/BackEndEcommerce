@@ -40,9 +40,6 @@ public class PagamentoParceladoService {
     }
 
     public void validar(PagamentoParcelado pagamentoParcelado) {
-        if (pagamentoParcelado.getId() == null || pagamentoParcelado.getId() == 0) {
-            throw new RegraNegocioException("Pagamento parcelado inválido");
-        }
         if (pagamentoParcelado.getPreco() == null || pagamentoParcelado.getPreco() == 0) {
             throw new RegraNegocioException("Preço inválido");
         }
