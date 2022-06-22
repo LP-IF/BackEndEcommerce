@@ -40,9 +40,6 @@ public class ProdutoService {
     }
 
     public void validar(Produto produto) {
-        if (produto.getId() == null || produto.getId() == 0) {
-            throw new RegraNegocioException("Produto inválido");
-        }
         if (produto.getNomeProduto() == null || produto.getNomeProduto().trim().equals("")) {
             throw new RegraNegocioException("Nome do Produto inválido");
         }
