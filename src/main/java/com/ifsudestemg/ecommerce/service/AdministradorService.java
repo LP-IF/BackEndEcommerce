@@ -40,9 +40,6 @@ public class AdministradorService {
     }
 
     public void validar(Administrador administrador) {
-        if (administrador.getId() == null || administrador.getId() == 0) {
-            throw new RegraNegocioException("Administrador inválido");
-        }
         if (administrador.getCpf() == null || administrador.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");
         }
