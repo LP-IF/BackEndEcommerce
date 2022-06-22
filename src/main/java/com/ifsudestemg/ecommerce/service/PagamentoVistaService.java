@@ -40,9 +40,6 @@ public class PagamentoVistaService {
     }
 
     public void validar(PagamentoVista pagamentoVista) {
-        if (pagamentoVista.getId() == null || pagamentoVista.getId() == 0) {
-            throw new RegraNegocioException("Pagamento à vista inválido");
-        }
         if (pagamentoVista.getPreco() == null || pagamentoVista.getPreco() == 0) {
             throw new RegraNegocioException("Preço inválido");
         }
