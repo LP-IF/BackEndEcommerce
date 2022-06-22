@@ -40,9 +40,6 @@ public class CartaoService {
     }
 
     public void validar(Cartao cartao) {
-        if (cartao.getId() == null || cartao.getId() == 0) {
-            throw new RegraNegocioException("Administrador inválido");
-        }
         if (cartao.getNomeTitular() == null || cartao.getNomeTitular().trim().equals("")) {
             throw new RegraNegocioException("Nome titular inválido");
         }
