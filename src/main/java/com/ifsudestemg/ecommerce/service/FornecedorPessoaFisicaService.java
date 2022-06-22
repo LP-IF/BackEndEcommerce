@@ -40,9 +40,6 @@ public class FornecedorPessoaFisicaService {
     }
 
     public void validar(FornecedorPessoaFisica fornecedorPessoaFisica) {
-        if (fornecedorPessoaFisica.getId() == null || fornecedorPessoaFisica.getId() == 0) {
-            throw new RegraNegocioException("Fornecedor Pessoa Física inválido");
-        }
         if (fornecedorPessoaFisica.getNome() == null || fornecedorPessoaFisica.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
