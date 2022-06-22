@@ -40,9 +40,6 @@ public class ClienteService {
     }
 
     public void validar(Cliente cliente) {
-        if (cliente.getId() == null || cliente.getId() == 0) {
-            throw new RegraNegocioException("Cliente inválido");
-        }
         if (cliente.getNome() == null || cliente.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
