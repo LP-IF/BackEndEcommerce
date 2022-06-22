@@ -40,9 +40,6 @@ public class EnderecoService {
     }
 
     public void validar(Endereco endereco) {
-        if (endereco.getId() == null || endereco.getId() == 0) {
-            throw new RegraNegocioException("Endereço inválido");
-        }
         if (endereco.getNumero() == null || endereco.getNumero() == 0) {
             throw new RegraNegocioException("Numero inválido");
         }
