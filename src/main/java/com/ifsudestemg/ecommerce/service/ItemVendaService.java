@@ -40,9 +40,6 @@ public class ItemVendaService {
     }
 
     public void validar(ItemVenda itemVenda) {
-        if (itemVenda.getId() == null || itemVenda.getId() == 0) {
-            throw new RegraNegocioException("Item de Venda inválido");
-        }
         if (itemVenda.getPrecoUnit() == null || itemVenda.getPrecoUnit() == 0) {
             throw new RegraNegocioException("Preço Unitário inválido");
         }
