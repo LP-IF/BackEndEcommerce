@@ -40,9 +40,6 @@ public class CupomService {
     }
 
     public void validar(Cupom cupom) {
-        if (cupom.getId() == null || cupom.getId() == 0) {
-            throw new RegraNegocioException("Cupom inválido");
-        }
         if (cupom.getPorcentagem() == null || cupom.getPorcentagem() == 0) {
             throw new RegraNegocioException("Porcentagem inválido");
         }
