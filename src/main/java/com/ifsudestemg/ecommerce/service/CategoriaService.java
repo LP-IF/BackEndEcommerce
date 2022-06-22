@@ -40,9 +40,6 @@ public class CategoriaService {
     }
 
     public void validar(Categoria categoria) {
-        if (categoria.getId() == null || categoria.getId() == 0) {
-            throw new RegraNegocioException("Categoria inválida");
-        }
         if (categoria.getProduto() == null){
             throw new RegraNegocioException("Produto inválido");
         }
