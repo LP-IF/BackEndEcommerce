@@ -40,9 +40,6 @@ public class CompraProdutoService {
     }
 
     public void validar(CompraProduto compraProduto) {
-        if (compraProduto.getId() == null || compraProduto.getId() == 0) {
-            throw new RegraNegocioException("Compra produto inválido");
-        }
         if (compraProduto.getDataEntrega() == null || compraProduto.getDataEntrega().equals("")) {
             throw new RegraNegocioException("Data de entrega inválida");
         }
