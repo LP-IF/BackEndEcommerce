@@ -40,9 +40,6 @@ public class FornecedorPessoaJuridicaService {
     }
 
     public void validar(FornecedorPessoaJuridica fornecedorPessoaJuridica) {
-        if (fornecedorPessoaJuridica.getId() == null || fornecedorPessoaJuridica.getId() == 0) {
-            throw new RegraNegocioException("Fornecedor Pessoa Jurídica inválido");
-        }
         if (fornecedorPessoaJuridica.getCnpj() == null || fornecedorPessoaJuridica.getCnpj().trim().equals("")) {
             throw new RegraNegocioException("CNPJ inválido");
         }
