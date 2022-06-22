@@ -40,9 +40,6 @@ public class EstoqueService {
     }
 
     public void validar(Estoque estoque) {
-        if (estoque.getId() == null || estoque.getId() == 0) {
-            throw new RegraNegocioException("Estoque inválido");
-        }
         if (estoque.getQuantidadeEstoque() == null) {
             throw new RegraNegocioException("Quantidade do estoque inválido");
         }
