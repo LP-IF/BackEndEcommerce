@@ -17,8 +17,8 @@ public class Cartao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String nomeTitular;
-    private Integer numCartao;
-    private Date validade;
+    private String numCartao;
+    private String validade;
     private String cvv;
 
     @ManyToOne

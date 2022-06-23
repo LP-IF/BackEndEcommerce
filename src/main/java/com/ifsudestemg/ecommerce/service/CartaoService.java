@@ -43,7 +43,7 @@ public class CartaoService {
         if (cartao.getNomeTitular() == null || cartao.getNomeTitular().trim().equals("")) {
             throw new RegraNegocioException("Nome titular inválido");
         }
-        if (cartao.getNumCartao() == null || cartao.getNumCartao() == 0){
+        if (cartao.getNumCartao() == null || cartao.getNumCartao().trim().equals("")){
             throw new RegraNegocioException("Número do cartão inválida");
         }
         if (cartao.getCvv() == null || cartao.getCvv().trim().equals("")) {
