@@ -2,14 +2,13 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.AdministradorDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Administrador;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.service.AdministradorService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,5 +32,51 @@ public class AdministradorController {
             return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(administrador.map(AdministradorDTO::create));
+    }
+
+    @PostMapping()
+    public ResponseEntity post(AdministradorDTO dto) {
+        try {
+            Administrador administrador = converter(dto);
+            administrador = service.salvar(administrador);
+            return new ResponseEntity(administrador, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, AdministradorDTO dto) {
+        if (!service.getAdministradorById(id).isPresent()) {
+            return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Administrador administrador = converter(dto);
+            administrador.setId(id);
+            service.salvar(administrador);
+            return ResponseEntity.ok(administrador);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Administrador> administrador = service.getAdministradorById(id);
+        if (!administrador.isPresent()) {
+            return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(administrador.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public Administrador converter(AdministradorDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Administrador administrador = modelMapper.map(dto, Administrador.class);
+        return administrador;
     }
 }
