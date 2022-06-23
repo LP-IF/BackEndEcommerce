@@ -24,7 +24,7 @@ public class CartaoDTO {
 
     private Long idCliente;
     private String nome;
-    private Integer telefone;
+    private String telefone;
     private String email;
 
     public static CartaoDTO create(Cartao cartao) {
@@ -34,7 +34,7 @@ public class CartaoDTO {
         dto.cpf = cartao.getCliente().getCpf();
         dto.idCliente = cartao.getCliente().getId();
         dto.nome = cartao.getCliente().getNome();
-        dto.telefone = cartao.getCliente().getTelefone();
+        dto.telefone = cartao.getCliente().getNome();
         dto.email = cartao.getCliente().getEmail();
         return dto;
     }
