@@ -1,14 +1,13 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.EstoqueDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Estoque;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.service.EstoqueService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,4 +34,49 @@ public class EstoqueController {
         return ResponseEntity.ok(estoque.map(EstoqueDTO::create));
     }
 
+    @PostMapping()
+    public ResponseEntity post(EstoqueDTO dto) {
+        try {
+            Estoque estoque = converter(dto);
+            estoque = service.salvar(estoque);
+            return new ResponseEntity(estoque, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, EstoqueDTO dto) {
+        if (!service.getEstoqueById(id).isPresent()) {
+            return new ResponseEntity("Estoque não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            Estoque estoque = converter(dto);
+            estoque.setId(id);
+            service.salvar(estoque);
+            return ResponseEntity.ok(estoque);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<Estoque> estoque = service.getEstoqueById(id);
+        if (!estoque.isPresent()) {
+            return new ResponseEntity("Estoque não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(estoque.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public Estoque converter(EstoqueDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        Estoque estoque = modelMapper.map(dto, Estoque.class);
+        return estoque;
+    }
 }
