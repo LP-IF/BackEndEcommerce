@@ -1,14 +1,13 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.FornecedorPessoaJuridicaDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.FornecedorPessoaJuridica;
+import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.service.FornecedorPessoaJuridicaService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,5 +32,51 @@ public class FornecedorPessoaJuridicaController {
             return new ResponseEntity("Fornecedor Pessoa Juridica não encontrado", HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(fornecedorPessoaJuridica.map(FornecedorPessoaJuridicaDTO::create));
+    }
+
+    @PostMapping()
+    public ResponseEntity post(FornecedorPessoaJuridicaDTO dto) {
+        try {
+            FornecedorPessoaJuridica fornecedorPessoaJuridica = converter(dto);
+            fornecedorPessoaJuridica = service.salvar(fornecedorPessoaJuridica);
+            return new ResponseEntity(fornecedorPessoaJuridica, HttpStatus.CREATED);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity atualizar(@PathVariable("id") Long id, FornecedorPessoaJuridicaDTO dto) {
+        if (!service.getFornecedorPessoaJuridicaById(id).isPresent()) {
+            return new ResponseEntity("FornecedorPessoaJuridica não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            FornecedorPessoaJuridica fornecedorPessoaJuridica = converter(dto);
+            fornecedorPessoaJuridica.setId(id);
+            service.salvar(fornecedorPessoaJuridica);
+            return ResponseEntity.ok(fornecedorPessoaJuridica);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluir(@PathVariable("id") Long id) {
+        Optional<FornecedorPessoaJuridica> fornecedorPessoaJuridica = service.getFornecedorPessoaJuridicaById(id);
+        if (!fornecedorPessoaJuridica.isPresent()) {
+            return new ResponseEntity("FornecedorPessoaJuridica não encontrado", HttpStatus.NOT_FOUND);
+        }
+        try {
+            service.excluir(fornecedorPessoaJuridica.get());
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        } catch (RegraNegocioException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    public FornecedorPessoaJuridica converter(FornecedorPessoaJuridicaDTO dto) {
+        ModelMapper modelMapper = new ModelMapper();
+        FornecedorPessoaJuridica fornecedorPessoaJuridica = modelMapper.map(dto, FornecedorPessoaJuridica.class);
+        return fornecedorPessoaJuridica;
     }
 }
