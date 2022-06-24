@@ -18,7 +18,7 @@ public class ClienteDTO {
     private String cpf;
 
     private String nome;
-    private Integer telefone;
+    private String telefone;
     private String email;
 
     public static ClienteDTO create(Cliente cliente) {

@@ -20,7 +20,7 @@ public class CompraProdutoDTO {
 
     private Long IdFornecedor;
     private String nome;
-    private Integer telefone;
+    private String telefone;
     private String email;
 
     public static CompraProdutoDTO create(CompraProduto compraProduto) {
