@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -14,27 +13,14 @@ import java.util.Date;
 public class CartaoDTO {
     private Long Id;
     private String nomeTitular;
-    private Integer numCartao;
-    private Date validade;
+    private String numCartao;
+    private String validade;
     private String cvv;
 
-    private String dataNascimento;
-    private String cpf;
-
-    private Long idCliente;
-    private String nome;
-    private String telefone;
-    private String email;
 
     public static CartaoDTO create(Cartao cartao) {
         ModelMapper modelMapper = new ModelMapper();
         CartaoDTO dto = modelMapper.map(cartao, CartaoDTO.class);
-        dto.dataNascimento = cartao.getCliente().getDataNascimento();
-        dto.cpf = cartao.getCliente().getCpf();
-        dto.idCliente = cartao.getCliente().getId();
-        dto.nome = cartao.getCliente().getNome();
-        dto.telefone = cartao.getCliente().getNome();
-        dto.email = cartao.getCliente().getEmail();
         return dto;
     }
 }

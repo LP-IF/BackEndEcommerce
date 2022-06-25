@@ -49,8 +49,5 @@ public class CartaoService {
         if (cartao.getCvv() == null || cartao.getCvv().trim().equals("")) {
             throw new RegraNegocioException("CVV inválido");
         }
-        if (cartao.getCliente() == null){
-            throw new RegraNegocioException("Cliente inválido");
-        }
     }
 }
