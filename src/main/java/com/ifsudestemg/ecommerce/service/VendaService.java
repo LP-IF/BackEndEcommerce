@@ -46,9 +46,6 @@ public class VendaService {
         if (venda.getDataVenda() == null) {
             throw new RegraNegocioException("Data da venda inválida");
         }
-        if (venda.getDataEntrega() == null) {
-            throw new RegraNegocioException("Data da entrega inválida");
-        }
         if (venda.getNumeroPedido() == null || venda.getNumeroPedido() == 0) {
             throw new RegraNegocioException("Número do pedido inválido");
         }
