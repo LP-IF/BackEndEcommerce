@@ -1,6 +1,5 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto;
 
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.CarrinhoCompras;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cartao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
