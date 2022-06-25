@@ -20,8 +20,8 @@ public class Venda {
     private Integer estrelasAvaliacao;
     private String comentarioAvaliacao;
     private Integer numeroPedido;
-    private Date dataVenda;
-    private Date dataEntrega;
+    private String dataVenda;
+    private String dataEntrega;
 
     @ManyToOne
     private Cliente cliente;

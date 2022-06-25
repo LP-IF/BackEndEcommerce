@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/ItensCompra")
+@RequestMapping("/api/v1/itensCompra")
 @RequiredArgsConstructor
 public class ItemCompraController {
     private final ItemCompraService service;
