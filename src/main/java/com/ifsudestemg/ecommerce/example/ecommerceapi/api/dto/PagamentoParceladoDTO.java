@@ -14,6 +14,8 @@ import org.modelmapper.ModelMapper;
 public class PagamentoParceladoDTO {
     private Integer parcelas;
     private Double juros;
+    private Double preco;
+    private Long id;
 
     public static PagamentoParceladoDTO create(PagamentoParcelado pagamentoParcelado) {
         ModelMapper modelMapper = new ModelMapper();

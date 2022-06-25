@@ -25,7 +25,6 @@ public class EnderecoDTO {
     private String cep;
     private String estado;
     private Boolean isPrincipal;
-    private Usuario usuario;
     
     public static EnderecoDTO create(Endereco endereco){
         ModelMapper modelMapper = new ModelMapper();

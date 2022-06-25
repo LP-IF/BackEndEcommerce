@@ -12,7 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 
 public class PagamentoParcelado extends Pagamento{
-
     private Integer parcelas;
     private Double juros;
 }

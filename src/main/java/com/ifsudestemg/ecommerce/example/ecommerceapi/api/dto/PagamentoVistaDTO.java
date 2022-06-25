@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 
 public class PagamentoVistaDTO {
     private Double desconto;
+    private Double preco;
+    private Long id;
 
     public static PagamentoVistaDTO create(PagamentoVista pagamentoVista) {
         ModelMapper modelMapper = new ModelMapper();

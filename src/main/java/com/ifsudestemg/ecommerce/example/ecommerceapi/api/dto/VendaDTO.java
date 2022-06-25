@@ -19,8 +19,8 @@ public class VendaDTO {
     private Integer estrelasAvaliacao;
     private String comentarioAvaliacao;
     private Integer numeroPedido;
-    private Date dataVenda;
-    private Date dataEntrega;
+    private String dataVenda;
+    private String dataEntrega;
 
     public static VendaDTO create(Venda venda) {
         ModelMapper modelMapper = new ModelMapper();
