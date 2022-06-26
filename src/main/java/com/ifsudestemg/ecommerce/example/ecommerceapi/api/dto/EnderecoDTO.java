@@ -25,10 +25,13 @@ public class EnderecoDTO {
     private String cep;
     private String estado;
     private Boolean isPrincipal;
+
+    private Long usuarioId;
     
     public static EnderecoDTO create(Endereco endereco){
         ModelMapper modelMapper = new ModelMapper();
         EnderecoDTO dto = modelMapper.map(endereco, EnderecoDTO.class);
+        dto.usuarioId = endereco.getUsuario().getId();
         return dto;        
     }
 }
