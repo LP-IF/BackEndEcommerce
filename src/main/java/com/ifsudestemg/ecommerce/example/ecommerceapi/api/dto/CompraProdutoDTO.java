@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CompraProdutoDTO {
     private Long Id;
-    private Date dataEntrega;
+    private String dataEntrega;
     private Double custoTotal;
 
     private Long IdFornecedor;
