@@ -17,7 +17,7 @@ public class CompraProduto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
-    private Date dataEntrega;
+    private String dataEntrega;
     private Double custoTotal;
 
     @ManyToOne
