@@ -17,6 +17,8 @@ public class CartaoDTO {
     private String validade;
     private String cvv;
 
+    private Long clienteId;
+
 
     public static CartaoDTO create(Cartao cartao) {
         ModelMapper modelMapper = new ModelMapper();
