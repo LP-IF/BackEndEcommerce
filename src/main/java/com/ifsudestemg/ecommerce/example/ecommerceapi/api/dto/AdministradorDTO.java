@@ -18,7 +18,7 @@ public class AdministradorDTO {
     private String dataNascimento;
     private String cpf;
     private String nome;
-    private Integer telefone;
+    private String telefone;
     private String email;
     private String senha;
 
