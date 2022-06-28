@@ -14,6 +14,7 @@ public class CategoriaDTO {
     private Long Id;
     private String nome;
 
+    private Long produtoId;
     public static CategoriaDTO create(Categoria categoria) {
         ModelMapper modelMapper = new ModelMapper();
         CategoriaDTO dto = modelMapper.map(categoria, CategoriaDTO.class);
