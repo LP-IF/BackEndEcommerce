@@ -75,8 +75,16 @@ public class AdministradorController {
     }
 
     public Administrador converter(AdministradorDTO dto) {
-        ModelMapper modelMapper = new ModelMapper();
-        Administrador administrador = modelMapper.map(dto, Administrador.class);
+        //ModelMapper modelMapper = new ModelMapper();
+        //Administrador administrador = modelMapper.map(dto, Administrador.class);
+        Administrador administrador = new Administrador();
+        administrador.setId(dto.getId());
+        administrador.setNome(dto.getNome());
+        administrador.setEmail(dto.getEmail());
+        administrador.setSenha(dto.getSenha());
+        administrador.setTelefone(dto.getTelefone());
+        administrador.setDataNascimento(dto.getDataNascimento());
+        administrador.setCpf(dto.getCpf());
         return administrador;
     }
 }
