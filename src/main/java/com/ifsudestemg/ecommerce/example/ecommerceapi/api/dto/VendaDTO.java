@@ -22,6 +22,7 @@ public class VendaDTO {
     private String dataVenda;
     private String dataEntrega;
 
+    private Long clienteId;
     public static VendaDTO create(Venda venda) {
         ModelMapper modelMapper = new ModelMapper();
         VendaDTO dto = modelMapper.map(venda, VendaDTO.class);
