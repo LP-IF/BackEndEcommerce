@@ -16,7 +16,4 @@ public class Cliente extends Usuario {
     private String dataNascimento;
     private String cpf;
 
-    @OneToOne
-    private CarrinhoCompras carrinhoCompras;
-
 }
