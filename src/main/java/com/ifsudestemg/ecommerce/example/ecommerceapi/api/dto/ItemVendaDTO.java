@@ -18,11 +18,12 @@ public class ItemVendaDTO {
     private Integer quant;
 
     private Long pagamentoId;
+    private Long produtoId;
+    private Long vendaId;
 
     public static ItemVendaDTO create(ItemVenda itemVenda){
         ModelMapper modelMapper = new ModelMapper();
         ItemVendaDTO dto = modelMapper.map(itemVenda, ItemVendaDTO.class);
-        dto.pagamentoId = itemVenda.getPagamento().getId();
         return dto;
     }
 }
