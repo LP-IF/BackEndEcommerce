@@ -16,6 +16,8 @@ public class ItemCompraDTO {
     private Double custoUnit;
     private Integer quantidade;
 
+    private Long produtoId;
+
     public static ItemCompraDTO create(ItemCompra itemCompra){
         ModelMapper modelMapper = new ModelMapper();
         ItemCompraDTO dto = modelMapper.map(itemCompra, ItemCompraDTO.class);
