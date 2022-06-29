@@ -28,5 +28,5 @@ public class Endereco {
 
     @ManyToOne
     private Usuario usuario;
-    
+
 }
