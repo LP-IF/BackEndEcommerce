@@ -21,9 +21,6 @@ public class ItemVenda {
     private Integer quant;
 
     @OneToOne
-    private ItemCarrinho itensCarrinho;
-
-    @OneToOne
     private Pagamento pagamento;
 
     @ManyToOne
