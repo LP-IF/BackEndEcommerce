@@ -14,13 +14,17 @@ import java.util.Date;
 
 public class FornecedorPessoaJuridicaDTO {
     private Long id;
-    private Date dataNascimento;
+
+    private String nome;
+    private String telefone;
+    private String email;
+    private String senha;
+
     private String cnpj;
     private String nomeRepresentante;
     private String cpfRepresentante;
     private String emailRepresentante;
     private Integer telRepresentante;
-    private String senha;
 
     public static FornecedorPessoaJuridicaDTO create(FornecedorPessoaJuridica fornecedor){
         ModelMapper modelMapper = new ModelMapper();
