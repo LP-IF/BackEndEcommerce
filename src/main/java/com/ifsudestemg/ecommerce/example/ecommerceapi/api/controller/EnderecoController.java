@@ -2,8 +2,10 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.EnderecoDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Endereco;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Usuario;
 import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.service.EnderecoService;
+import com.ifsudestemg.ecommerce.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -18,17 +20,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/enderecos")
 @RequiredArgsConstructor
 public class EnderecoController {
-    private final EnderecoService service;
+    private final EnderecoService enderecoService;
+    private final UsuarioService usuarioService;
 
     @GetMapping()
     public ResponseEntity get() {
-        List<Endereco> enderecos = service.getEndereco();
+        List<Endereco> enderecos = enderecoService.getEndereco();
         return ResponseEntity.ok(enderecos.stream().map(EnderecoDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Long id) {
-        Optional<Endereco> endereco = service.getEnderecoById(id);
+        Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
         if (!endereco.isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -38,7 +41,9 @@ public class EnderecoController {
     public ResponseEntity post(EnderecoDTO dto) {
         try {
             Endereco endereco = converter(dto);
-            endereco = service.salvar(endereco);
+            Usuario usuario = usuarioService.salvar(endereco.getUsuario());
+            endereco.setUsuario(usuario);
+            endereco = enderecoService.salvar(endereco);
             return new ResponseEntity(endereco, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -47,13 +52,15 @@ public class EnderecoController {
 
     @PutMapping("{id}")
     public ResponseEntity atualizar(@PathVariable("id") Long id, EnderecoDTO dto) {
-        if (!service.getEnderecoById(id).isPresent()) {
+        if (!enderecoService.getEnderecoById(id).isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             Endereco endereco = converter(dto);
             endereco.setId(id);
-            service.salvar(endereco);
+            Usuario usuario = usuarioService.salvar(endereco.getUsuario());
+            endereco.setUsuario(usuario);
+            enderecoService.salvar(endereco);
             return ResponseEntity.ok(endereco);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -62,12 +69,12 @@ public class EnderecoController {
 
     @DeleteMapping("{id}")
     public ResponseEntity excluir(@PathVariable("id") Long id) {
-        Optional<Endereco> endereco = service.getEnderecoById(id);
+        Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
         if (!endereco.isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
-            service.excluir(endereco.get());
+            enderecoService.excluir(endereco.get());
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -77,6 +84,14 @@ public class EnderecoController {
     public Endereco converter(EnderecoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Endereco endereco = modelMapper.map(dto, Endereco.class);
+        if (dto.getUsuarioId() != null) {
+            Optional<Usuario> usuario = usuarioService.getUsuarioById(dto.getUsuarioId());
+            if (!usuario.isPresent()) {
+                endereco.setUsuario(null);
+            } else {
+                endereco.setUsuario(usuario.get());
+            }
+        }
         return endereco;
     }
 }

@@ -40,11 +40,11 @@ public class CartaoService {
     }
 
     public void validar(Cartao cartao) {
-        if (cartao.getNomeTitular() == null || cartao.getNomeTitular().trim().equals("")) {
-            throw new RegraNegocioException("Nome titular inválido");
+        if (cartao.getCliente().getId() == null) {
+            throw new RegraNegocioException("Cliente inválido");
         }
         if (cartao.getNumCartao() == null || cartao.getNumCartao().trim().equals("")){
-            throw new RegraNegocioException("Número do cartão inválida");
+            throw new RegraNegocioException("Número do cartão inválido");
         }
         if (cartao.getCvv() == null || cartao.getCvv().trim().equals("")) {
             throw new RegraNegocioException("CVV inválido");

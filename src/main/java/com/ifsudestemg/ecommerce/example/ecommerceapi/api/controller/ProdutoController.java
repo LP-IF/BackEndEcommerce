@@ -1,8 +1,10 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.ProdutoDTO;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Estoque;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Produto;
 import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.service.EstoqueService;
 import com.ifsudestemg.ecommerce.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,17 +20,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/produtos")
 @RequiredArgsConstructor
 public class ProdutoController {
-    private final ProdutoService service;
+    private final ProdutoService produtoService;
+    private final EstoqueService estoqueService;
 
     @GetMapping()
     public ResponseEntity get() {
-        List<Produto> produtos = service.getProduto();
+        List<Produto> produtos = produtoService.getProduto();
         return ResponseEntity.ok(produtos.stream().map(ProdutoDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable("id") Long id) {
-        Optional<Produto> produto = service.getProdutoById(id);
+        Optional<Produto> produto = produtoService.getProdutoById(id);
         if (!produto.isPresent()) {
             return new ResponseEntity("Produto não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -39,7 +42,9 @@ public class ProdutoController {
     public ResponseEntity post(ProdutoDTO dto) {
         try {
             Produto produto = converter(dto);
-            produto = service.salvar(produto);
+            Estoque estoque = estoqueService.salvar(produto.getEstoque());
+            produto.setEstoque(estoque);
+            produto = produtoService.salvar(produto);
             return new ResponseEntity(produto, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -48,13 +53,15 @@ public class ProdutoController {
 
     @PutMapping("{id}")
     public ResponseEntity atualizar(@PathVariable("id") Long id, ProdutoDTO dto) {
-        if (!service.getProdutoById(id).isPresent()) {
+        if (!produtoService.getProdutoById(id).isPresent()) {
             return new ResponseEntity("Produto não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             Produto produto = converter(dto);
             produto.setId(id);
-            service.salvar(produto);
+            Estoque estoque = estoqueService.salvar(produto.getEstoque());
+            produto.setEstoque(estoque);
+            produtoService.salvar(produto);
             return ResponseEntity.ok(produto);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -63,12 +70,12 @@ public class ProdutoController {
 
     @DeleteMapping("{id}")
     public ResponseEntity excluir(@PathVariable("id") Long id) {
-        Optional<Produto> produto = service.getProdutoById(id);
+        Optional<Produto> produto = produtoService.getProdutoById(id);
         if (!produto.isPresent()) {
             return new ResponseEntity("Produto não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
-            service.excluir(produto.get());
+            produtoService.excluir(produto.get());
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (RegraNegocioException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -78,6 +85,14 @@ public class ProdutoController {
     public Produto converter(ProdutoDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         Produto produto = modelMapper.map(dto, Produto.class);
+        if (dto.getEstoqueId() != null) {
+            Optional<Estoque> estoque = estoqueService.getEstoqueById(dto.getEstoqueId());
+            if (!estoque.isPresent()) {
+                produto.setEstoque(null);
+            } else {
+                produto.setEstoque(estoque.get());
+            }
+        }
         return produto;
     }
 }

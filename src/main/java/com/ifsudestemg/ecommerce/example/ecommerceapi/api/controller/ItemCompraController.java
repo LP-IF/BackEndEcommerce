@@ -2,8 +2,10 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.ItemCompraDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.ItemCompra;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Produto;
 import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.service.ItemCompraService;
+import com.ifsudestemg.ecommerce.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ItemCompraController {
     private final ItemCompraService service;
+    private final ProdutoService produtoService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -39,6 +42,8 @@ public class ItemCompraController {
     public ResponseEntity post(ItemCompraDTO dto) {
         try {
             ItemCompra itemCompra = converter(dto);
+            Produto produto = produtoService.salvar(itemCompra.getProduto());
+            itemCompra.setProduto(produto);
             itemCompra = service.salvar(itemCompra);
             return new ResponseEntity(itemCompra, HttpStatus.CREATED);
         } catch (RegraNegocioException e) {
@@ -54,6 +59,8 @@ public class ItemCompraController {
         try {
             ItemCompra itemCompra = converter(dto);
             itemCompra.setId(id);
+            Produto produto = produtoService.salvar(itemCompra.getProduto());
+            itemCompra.setProduto(produto);
             service.salvar(itemCompra);
             return ResponseEntity.ok(itemCompra);
         } catch (RegraNegocioException e) {
@@ -78,6 +85,14 @@ public class ItemCompraController {
     public ItemCompra converter(ItemCompraDTO dto) {
         ModelMapper modelMapper = new ModelMapper();
         ItemCompra itemCompra = modelMapper.map(dto, ItemCompra.class);
+        if (dto.getProdutoId() != null) {
+            Optional<Produto> produto = produtoService.getProdutoById(dto.getProdutoId());
+            if (!produto.isPresent()) {
+                itemCompra.setProduto(null);
+            } else {
+                itemCompra.setProduto(produto.get());
+            }
+        }
         return itemCompra;
     }
 }
