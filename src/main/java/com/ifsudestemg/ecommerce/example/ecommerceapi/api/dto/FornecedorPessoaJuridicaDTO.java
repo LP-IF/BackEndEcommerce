@@ -24,7 +24,7 @@ public class FornecedorPessoaJuridicaDTO {
     private String nomeRepresentante;
     private String cpfRepresentante;
     private String emailRepresentante;
-    private Integer telRepresentante;
+    private String telRepresentante;
 
     public static FornecedorPessoaJuridicaDTO create(FornecedorPessoaJuridica fornecedor){
         ModelMapper modelMapper = new ModelMapper();

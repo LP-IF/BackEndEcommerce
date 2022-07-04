@@ -83,6 +83,11 @@ public class FornecedorPessoaJuridicaController {
         fornecedorPessoaJuridica.setEmail(dto.getEmail());
         fornecedorPessoaJuridica.setSenha(dto.getSenha());
         fornecedorPessoaJuridica.setTelefone(dto.getTelefone());
+        fornecedorPessoaJuridica.setCnpj(dto.getCnpj());
+        fornecedorPessoaJuridica.setNomeRepresentante(dto.getNomeRepresentante());
+        fornecedorPessoaJuridica.setCpfRepresentante(dto.getCpfRepresentante());
+        fornecedorPessoaJuridica.setEmailRepresentante(dto.getEmailRepresentante());
+        fornecedorPessoaJuridica.setTelRepresentante(dto.getTelRepresentante());
         return fornecedorPessoaJuridica;
     }
 }

@@ -16,7 +16,7 @@ public class FornecedorPessoaJuridica extends Fornecedor {
     private String nomeRepresentante;
     private String cpfRepresentante;
     private String emailRepresentante;
-    private Integer telRepresentante;
+    private String telRepresentante;
 
 
 }
