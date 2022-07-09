@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.CupomDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cupom;
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.service.CupomService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.CupomService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

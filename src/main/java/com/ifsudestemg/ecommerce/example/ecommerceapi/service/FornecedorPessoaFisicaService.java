@@ -1,8 +1,8 @@
-package com.ifsudestemg.ecommerce.service;
+package com.ifsudestemg.ecommerce.example.ecommerceapi.service;
 
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Fornecedor;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.FornecedorRepository;
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.FornecedorPessoaFisicaRepository;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,35 +11,35 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class FornecedorService {
+public class FornecedorPessoaFisicaService {
 
-    private FornecedorRepository repository;
+    private FornecedorPessoaFisicaRepository repository;
 
-    public FornecedorService(FornecedorRepository repository) {
+    public FornecedorPessoaFisicaService(FornecedorPessoaFisicaRepository repository) {
         this.repository = repository;
     }
 
-    public List<Fornecedor> getFornecedor() {
+    public List<FornecedorPessoaFisica> getFornecedorPessoaFisica() {
         return repository.findAll();
     }
 
-    public Optional<Fornecedor> getFornecedorById(Long id) {
+    public Optional<FornecedorPessoaFisica> getFornecedorPessoaFisicaById(Long id) {
         return repository.findById(id);
     }
 
     @Transactional
-    public Fornecedor salvar(Fornecedor fornecedorPessoaFisica) {
+    public FornecedorPessoaFisica salvar(FornecedorPessoaFisica fornecedorPessoaFisica) {
         validar(fornecedorPessoaFisica);
         return repository.save(fornecedorPessoaFisica);
     }
 
     @Transactional
-    public void excluir(Fornecedor fornecedorPessoaFisica) {
+    public void excluir(FornecedorPessoaFisica fornecedorPessoaFisica) {
         Objects.requireNonNull(fornecedorPessoaFisica.getId());
         repository.delete(fornecedorPessoaFisica);
     }
 
-    public void validar(Fornecedor fornecedorPessoaFisica) {
+    public void validar(FornecedorPessoaFisica fornecedorPessoaFisica) {
         if (fornecedorPessoaFisica.getNome() == null || fornecedorPessoaFisica.getNome().trim().equals("")) {
             throw new RegraNegocioException("Nome inválido");
         }
@@ -48,6 +48,9 @@ public class FornecedorService {
         }
         if (fornecedorPessoaFisica.getSenha() == null || fornecedorPessoaFisica.getSenha().trim().equals("")) {
             throw new RegraNegocioException("Senha inválida");
+        }
+        if (fornecedorPessoaFisica.getCpf() == null || fornecedorPessoaFisica.getCpf().trim().equals("")) {
+            throw new RegraNegocioException("CPF inválido");
         }
     }
 }

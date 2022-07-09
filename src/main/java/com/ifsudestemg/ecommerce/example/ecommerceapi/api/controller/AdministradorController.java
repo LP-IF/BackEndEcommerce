@@ -2,10 +2,9 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.AdministradorDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Administrador;
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.service.AdministradorService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.AdministradorService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

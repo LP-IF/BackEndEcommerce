@@ -2,11 +2,10 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.CategoriaDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Categoria;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Fornecedor;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Produto;
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.service.CategoriaService;
-import com.ifsudestemg.ecommerce.service.ProdutoService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.CategoriaService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

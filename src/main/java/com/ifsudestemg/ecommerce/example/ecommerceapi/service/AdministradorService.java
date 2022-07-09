@@ -1,6 +1,6 @@
-package com.ifsudestemg.ecommerce.service;
+package com.ifsudestemg.ecommerce.example.ecommerceapi.service;
 
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.*;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.AdministradorRepository;
 import org.springframework.stereotype.Service;

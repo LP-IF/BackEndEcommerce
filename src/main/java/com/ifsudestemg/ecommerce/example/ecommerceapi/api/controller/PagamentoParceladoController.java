@@ -1,8 +1,8 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.PagamentoParceladoDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.PagamentoParcelado;
-import com.ifsudestemg.ecommerce.exception.RegraNegocioException;
-import com.ifsudestemg.ecommerce.service.PagamentoParceladoService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.PagamentoParceladoService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

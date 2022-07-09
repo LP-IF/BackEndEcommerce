@@ -1,4 +1,4 @@
-package com.ifsudestemg.ecommerce.service;
+package com.ifsudestemg.ecommerce.example.ecommerceapi.service;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Usuario;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.repository.UsuarioRepository;

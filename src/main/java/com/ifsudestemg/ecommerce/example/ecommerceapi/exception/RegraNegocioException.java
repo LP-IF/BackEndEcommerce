@@ -1,4 +1,4 @@
-package com.ifsudestemg.ecommerce.exception;
+package com.ifsudestemg.ecommerce.example.ecommerceapi.exception;
 
 public class RegraNegocioException extends RuntimeException {
 
