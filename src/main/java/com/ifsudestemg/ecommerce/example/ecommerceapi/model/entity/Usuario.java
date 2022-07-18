@@ -1,6 +1,7 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 
 public class Usuario {
     @Id
@@ -18,5 +20,8 @@ public class Usuario {
     private String nome;
     private String telefone;
     private String email;
+
     private String senha;
+    private String login;
+    private boolean admin;
 }
