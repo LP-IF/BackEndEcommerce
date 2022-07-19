@@ -19,6 +19,7 @@ public class Cartao {
     private String nomeTitular;
     private String numCartao;
     private String validade;
+    
     private String cvv;
 
     @ManyToOne
