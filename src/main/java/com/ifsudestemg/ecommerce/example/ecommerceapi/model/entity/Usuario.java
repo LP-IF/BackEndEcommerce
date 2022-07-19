@@ -11,17 +11,14 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String nome;
     private String telefone;
     private String email;
 
-    private String senha;
-    private String login;
-    private boolean admin;
+    private Login login;
 }
