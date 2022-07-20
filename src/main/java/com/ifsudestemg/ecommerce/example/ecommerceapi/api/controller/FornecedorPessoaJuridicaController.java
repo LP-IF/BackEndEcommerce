@@ -74,13 +74,10 @@ public class FornecedorPessoaJuridicaController {
     }
 
     public FornecedorPessoaJuridica converter(FornecedorPessoaJuridicaDTO dto) {
-        //ModelMapper modelMapper = new ModelMapper();
-        //FornecedorPessoaJuridica fornecedorPessoaJuridica = modelMapper.map(dto, FornecedorPessoaJuridica.class);
         FornecedorPessoaJuridica fornecedorPessoaJuridica = new FornecedorPessoaJuridica();
         fornecedorPessoaJuridica.setId(dto.getId());
         fornecedorPessoaJuridica.setNome(dto.getNome());
         fornecedorPessoaJuridica.setEmail(dto.getEmail());
-        fornecedorPessoaJuridica.setSenha(dto.getSenha());
         fornecedorPessoaJuridica.setTelefone(dto.getTelefone());
         fornecedorPessoaJuridica.setCnpj(dto.getCnpj());
         fornecedorPessoaJuridica.setNomeRepresentante(dto.getNomeRepresentante());

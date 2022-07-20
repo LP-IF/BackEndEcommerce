@@ -3,9 +3,9 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.api.controller;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.CredenciaisDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.TokenDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.SenhaInvalidaException;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Usuario;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Login;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.security.JwtService;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.service.UsuarioService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,32 +15,32 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
+@RequestMapping("/api/v1/logins")
 @RequiredArgsConstructor
-public class UsuarioController {
+public class LoginController {
 
-    private final UsuarioService usuarioService;
+    private final LoginService loginService;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario salvar(@RequestBody Usuario usuario ){
-        String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
-        return usuarioService.salvar(usuario);
+    public Login salvar(@RequestBody Login login ){
+        String senhaCriptografada = passwordEncoder.encode(login.getSenha());
+        login.setSenha(senhaCriptografada);
+        return loginService.salvar(login);
     }
 
 
     @PostMapping("/auth")
     public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
         try{
-            Usuario usuario = Usuario.builder()
+            Login login = Login.builder()
                     .login(credenciais.getLogin())
                     .senha(credenciais.getSenha()).build();
-            UserDetails usuarioAutenticado = usuarioService.autenticar(usuario);
-            String token = jwtService.gerarToken(usuario);
-            return new TokenDTO(usuario.getLogin(), token);
+            UserDetails loginAutenticado = loginService.autenticar(login);
+            String token = jwtService.gerarToken(login);
+            return new TokenDTO(login.getLogin(), token);
         } catch (UsernameNotFoundException | SenhaInvalidaException e ){
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }

@@ -46,9 +46,6 @@ public class FornecedorPessoaFisicaService {
         if (fornecedorPessoaFisica.getEmail() == null || fornecedorPessoaFisica.getEmail().trim().equals("")) {
             throw new RegraNegocioException("Email inválido");
         }
-        if (fornecedorPessoaFisica.getSenha() == null || fornecedorPessoaFisica.getSenha().trim().equals("")) {
-            throw new RegraNegocioException("Senha inválida");
-        }
         if (fornecedorPessoaFisica.getCpf() == null || fornecedorPessoaFisica.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");
         }

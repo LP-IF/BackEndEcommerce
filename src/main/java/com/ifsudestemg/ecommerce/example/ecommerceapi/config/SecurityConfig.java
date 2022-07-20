@@ -2,7 +2,7 @@ package com.ifsudestemg.ecommerce.example.ecommerceapi.config;
 
 import com.ifsudestemg.ecommerce.example.ecommerceapi.security.JwtAuthFilter;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.security.JwtService;
-import com.ifsudestemg.ecommerce.example.ecommerceapi.service.UsuarioService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -22,7 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
-    private UsuarioService usuarioService;
+    private LoginService loginService;
 
     @Autowired
     private JwtService jwtService;
@@ -34,13 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
     @Bean
     public OncePerRequestFilter jwtFilter(){
-        return new JwtAuthFilter(jwtService, usuarioService);
+        return new JwtAuthFilter(jwtService, loginService);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(usuarioService)
+                .userDetailsService(loginService)
                 .passwordEncoder(passwordEncoder());
     }
 
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .hasAnyRole("USER", "ADMIN")
                 /*.antMatchers("/api/v1/turmas/**")
                 .hasRole("ADMIN")*/
-                .antMatchers(HttpMethod.POST, "/api/v1/usuarios/**")
+                .antMatchers(HttpMethod.POST, "/api/v1/logins/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

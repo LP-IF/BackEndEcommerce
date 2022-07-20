@@ -20,7 +20,6 @@ public class ClienteDTO {
     private String nome;
     private String telefone;
     private String email;
-    private String senha;
 
     public static ClienteDTO create(Cliente cliente) {
         ModelMapper modelMapper = new ModelMapper();
@@ -28,7 +27,6 @@ public class ClienteDTO {
         dto.nome = cliente.getNome();
         dto.telefone = cliente.getTelefone();
         dto.email = cliente.getEmail();
-        dto.senha = cliente.getSenha();
         return dto;
     }
 

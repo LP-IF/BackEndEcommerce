@@ -75,13 +75,10 @@ public class ClienteController {
     }
 
     public Cliente converter(ClienteDTO dto) {
-        //ModelMapper modelMapper = new ModelMapper();
-        //Cliente cliente = modelMapper.map(dto, Cliente.class);
         Cliente cliente = new Cliente();
         cliente.setId(dto.getId());
         cliente.setNome(dto.getNome());
         cliente.setEmail(dto.getEmail());
-        cliente.setSenha(dto.getSenha());
         cliente.setTelefone(dto.getTelefone());
         cliente.setDataNascimento(dto.getDataNascimento());
         cliente.setCpf(dto.getCpf());

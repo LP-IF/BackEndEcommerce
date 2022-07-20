@@ -1,6 +1,6 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.security;
 
-import com.ifsudestemg.ecommerce.example.ecommerceapi.service.UsuarioService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +16,11 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private JwtService jwtService;
-    private UsuarioService usuarioService;
+    private LoginService loginService;
 
-    public JwtAuthFilter( JwtService jwtService, UsuarioService usuarioService ) {
+    public JwtAuthFilter(JwtService jwtService, LoginService loginService ) {
         this.jwtService = jwtService;
-        this.usuarioService = usuarioService;
+        this.loginService = loginService;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             if(isValid){
                 String loginUser = jwtService.obterLoginUser(token);
-                UserDetails User = usuarioService.loadUserByUsername(loginUser);
+                UserDetails User = loginService.loadUserByUsername(loginUser);
                 UsernamePasswordAuthenticationToken user = new
                         UsernamePasswordAuthenticationToken(User,null,
                         User.getAuthorities());

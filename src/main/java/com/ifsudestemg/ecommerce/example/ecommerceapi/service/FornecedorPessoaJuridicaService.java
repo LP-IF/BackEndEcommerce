@@ -49,8 +49,5 @@ public class FornecedorPessoaJuridicaService {
         if (fornecedorPessoaJuridica.getEmailRepresentante() == null || fornecedorPessoaJuridica.getEmailRepresentante().trim().equals("")) {
             throw new RegraNegocioException("Email inválido");
         }
-        if (fornecedorPessoaJuridica.getSenha() == null || fornecedorPessoaJuridica.getSenha().trim().equals("")) {
-            throw new RegraNegocioException("Senha inválida");
-        }
     }
 }

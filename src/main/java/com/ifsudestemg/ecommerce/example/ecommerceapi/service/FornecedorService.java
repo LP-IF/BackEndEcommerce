@@ -46,8 +46,5 @@ public class FornecedorService {
         if (fornecedorPessoaFisica.getEmail() == null || fornecedorPessoaFisica.getEmail().trim().equals("")) {
             throw new RegraNegocioException("Email inválido");
         }
-        if (fornecedorPessoaFisica.getSenha() == null || fornecedorPessoaFisica.getSenha().trim().equals("")) {
-            throw new RegraNegocioException("Senha inválida");
-        }
     }
 }

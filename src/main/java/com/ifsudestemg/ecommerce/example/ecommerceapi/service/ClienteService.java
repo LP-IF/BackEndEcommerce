@@ -46,9 +46,6 @@ public class ClienteService {
         if (cliente.getEmail() == null || cliente.getEmail().trim().equals("")) {
             throw new RegraNegocioException("Email inválido");
         }
-        if (cliente.getSenha() == null || cliente.getSenha().trim().equals("")) {
-            throw new RegraNegocioException("Senha inválida");
-        }
         if (cliente.getCpf() == null || cliente.getCpf().trim().equals("")) {
             throw new RegraNegocioException("CPF inválido");
         }

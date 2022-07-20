@@ -1,7 +1,7 @@
 package com.ifsudestemg.ecommerce.example.ecommerceapi.security;
 
 
-import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Usuario;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Login;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +23,7 @@ public class JwtService {
     @Value("${security.jwt.chave-assinatura}")
     private String chaveAssinatura;
 
-    public String gerarToken(Usuario user ){
+    public String gerarToken(Login user ){
         long expString = Long.valueOf(expiracao);
         LocalDateTime dataHoraExpiracao = LocalDateTime.now().plusMinutes(expString);
         Instant instant = dataHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant();
