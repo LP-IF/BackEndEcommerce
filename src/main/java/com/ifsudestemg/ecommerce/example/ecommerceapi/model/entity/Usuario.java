@@ -20,5 +20,6 @@ public class Usuario {
     private String telefone;
     private String email;
 
+    @OneToOne
     private Login login;
 }
