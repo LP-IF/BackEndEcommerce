@@ -21,10 +21,11 @@ public class AdministradorDTO {
     private String telefone;
     private String email;
     private String senha;
-
+    private Long loginId;
     public static AdministradorDTO create(Administrador administrador){
         ModelMapper modelMapper = new ModelMapper();
         AdministradorDTO dto = modelMapper.map(administrador, AdministradorDTO.class);
+        dto.loginId = administrador.getLogin().getId();
         return dto;
     }
 }

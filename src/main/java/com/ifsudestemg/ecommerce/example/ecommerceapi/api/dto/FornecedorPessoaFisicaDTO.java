@@ -20,10 +20,12 @@ public class FornecedorPessoaFisicaDTO {
     private String telefone;
     private String email;
     private String senha;
+    private Long loginId;
 
     public static FornecedorPessoaFisicaDTO create(FornecedorPessoaFisica fornecedor){
         ModelMapper modelMapper = new ModelMapper();
         FornecedorPessoaFisicaDTO dto = modelMapper.map(fornecedor, FornecedorPessoaFisicaDTO.class);
+        dto.loginId = fornecedor.getLogin().getId();
         return dto;
     }
 

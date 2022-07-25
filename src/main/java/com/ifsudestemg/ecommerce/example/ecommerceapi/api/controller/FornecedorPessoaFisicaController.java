@@ -3,6 +3,7 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.FornecedorPessoaFi
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.FornecedorPessoaFisica;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.FornecedorPessoaFisicaService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FornecedorPessoaFisicaController {
     private final FornecedorPessoaFisicaService service;
+    private final LoginService loginService;
 
     @GetMapping()
     public ResponseEntity get() {

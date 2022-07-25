@@ -4,6 +4,7 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.ClienteDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cliente;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ClienteService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ClienteController {
     private final ClienteService service;
+    private final LoginService loginService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -82,6 +84,7 @@ public class ClienteController {
         cliente.setTelefone(dto.getTelefone());
         cliente.setDataNascimento(dto.getDataNascimento());
         cliente.setCpf(dto.getCpf());
+        cliente.setLogin(loginService.getLoginById(dto.getLoginId()).get());
         return cliente;
     }
 

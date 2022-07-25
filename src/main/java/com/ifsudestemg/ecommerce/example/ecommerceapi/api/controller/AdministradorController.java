@@ -4,6 +4,7 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.AdministradorDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Administrador;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.AdministradorService;
+import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdministradorController {
     private final AdministradorService service;
+    private final LoginService loginService;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -81,6 +83,7 @@ public class AdministradorController {
         administrador.setTelefone(dto.getTelefone());
         administrador.setDataNascimento(dto.getDataNascimento());
         administrador.setCpf(dto.getCpf());
+        administrador.setLogin(loginService.getLoginById(dto.getLoginId()).get());
         return administrador;
     }
 }

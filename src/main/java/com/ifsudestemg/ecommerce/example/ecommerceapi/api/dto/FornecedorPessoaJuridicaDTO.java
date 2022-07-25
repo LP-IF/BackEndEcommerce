@@ -26,9 +26,12 @@ public class FornecedorPessoaJuridicaDTO {
     private String emailRepresentante;
     private String telRepresentante;
 
+    private Long loginId;
+
     public static FornecedorPessoaJuridicaDTO create(FornecedorPessoaJuridica fornecedor){
         ModelMapper modelMapper = new ModelMapper();
         FornecedorPessoaJuridicaDTO dto = modelMapper.map(fornecedor, FornecedorPessoaJuridicaDTO.class);
+        dto.loginId = fornecedor.getLogin().getId();
         return dto;
     }
 
