@@ -5,6 +5,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Administrador
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.AdministradorService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +26,19 @@ public class AdministradorController {
     private final LoginService loginService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os administradores")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Administrador encontrado")})
     public ResponseEntity get() {
         List<Administrador> administradores = service.getAdministrador();
         return ResponseEntity.ok(administradores.stream().map(AdministradorDTO::create).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Administrador encontrado"),
+            @ApiResponse(code = 404, message = "Administrador não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
         Optional<Administrador> administrador = service.getAdministradorById(id);
         if (!administrador.isPresent()) {
             return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
@@ -36,6 +47,10 @@ public class AdministradorController {
     }
 
     @PostMapping()
+    @ApiOperation("Obter detalhes de um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Administrador criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar administrador")})
     public ResponseEntity post(AdministradorDTO dto) {
         try {
             Administrador administrador = converter(dto);
@@ -47,7 +62,11 @@ public class AdministradorController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, AdministradorDTO dto) {
+    @ApiOperation("Obter detalhes de um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Administrador alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar administrador")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("Id do Administrador") Long id, AdministradorDTO dto) {
         if (!service.getAdministradorById(id).isPresent()) {
             return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -62,7 +81,12 @@ public class AdministradorController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um administrador")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Administrador excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir administrador"),
+            @ApiResponse(code = 404, message = "Administrador não encontrado")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
         Optional<Administrador> administrador = service.getAdministradorById(id);
         if (!administrador.isPresent()) {
             return new ResponseEntity("Administrador não encontrado", HttpStatus.NOT_FOUND);
