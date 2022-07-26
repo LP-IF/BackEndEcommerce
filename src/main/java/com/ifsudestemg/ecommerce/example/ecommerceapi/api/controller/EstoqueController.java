@@ -37,7 +37,7 @@ public class EstoqueController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Estoque encontrado"),
             @ApiResponse(code = 404, message = "Estoque não encontrado")})
-    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do estoque") Long id) {
         Optional<Estoque> estoque = service.getEstoqueById(id);
         if (!estoque.isPresent()) {
             return new ResponseEntity("Estoque não encontrado", HttpStatus.NOT_FOUND);
