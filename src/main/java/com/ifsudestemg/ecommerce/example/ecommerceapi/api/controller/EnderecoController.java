@@ -41,7 +41,7 @@ public class EnderecoController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Endereço encontrado"),
             @ApiResponse(code = 404, message = "Endereço não encontrado")})
-    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do endereço") Long id) {
         Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
         if (!endereco.isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
