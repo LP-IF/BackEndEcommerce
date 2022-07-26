@@ -6,6 +6,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Produto;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ItemCompraService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ProdutoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,13 +28,20 @@ public class ItemCompraController {
     private final ProdutoService produtoService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os Itens compra")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Item compra encontrado")})
     public ResponseEntity get() {
         List<ItemCompra> itemCompras = service.getItemCompra();
         return ResponseEntity.ok(itemCompras.stream().map(ItemCompraDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um item venda")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Item compra encontrado"),
+            @ApiResponse(code = 404, message = "Item compra não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do item compra") Long id) {
         Optional<ItemCompra> itemCompra = service.getItemCompraById(id);
         if (!itemCompra.isPresent()) {
             return new ResponseEntity("Item Compra não encontrado", HttpStatus.NOT_FOUND);
