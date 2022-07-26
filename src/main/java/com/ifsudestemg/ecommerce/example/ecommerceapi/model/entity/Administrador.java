@@ -14,5 +14,6 @@ import java.util.Date;
 public class Administrador extends Usuario{
 
     private String dataNascimento;
+    
     private String cpf;
 }
