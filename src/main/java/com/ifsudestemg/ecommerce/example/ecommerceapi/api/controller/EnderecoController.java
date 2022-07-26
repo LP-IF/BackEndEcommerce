@@ -6,6 +6,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Usuario;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.EnderecoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.UsuarioService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,13 +28,20 @@ public class EnderecoController {
     private final UsuarioService usuarioService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os endereços")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Endereços encontrado")})
     public ResponseEntity get() {
         List<Endereco> enderecos = enderecoService.getEndereco();
         return ResponseEntity.ok(enderecos.stream().map(EnderecoDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um endereço")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Endereço encontrado"),
+            @ApiResponse(code = 404, message = "Endereço não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
         Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
         if (!endereco.isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
