@@ -38,7 +38,7 @@ public class FornecedorPessoaJuridicaController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Fornecedor pessoa jurídica encontrado"),
             @ApiResponse(code = 404, message = "Fornecedor pessoa jurídica não encontrado")})
-    public ResponseEntity get(@PathVariable("id")  @ApiParam("Id do Administrador") Long id) {
+    public ResponseEntity get(@PathVariable("id")  @ApiParam("Id do fornecedor pessoa jurídica") Long id) {
         Optional<FornecedorPessoaJuridica> fornecedorPessoaJuridica = service.getFornecedorPessoaJuridicaById(id);
         if (!fornecedorPessoaJuridica.isPresent()) {
             return new ResponseEntity("Fornecedor Pessoa Juridica não encontrado", HttpStatus.NOT_FOUND);
