@@ -3,6 +3,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.EstoqueDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Estoque;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.EstoqueService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,13 +24,20 @@ public class EstoqueController {
     private final EstoqueService service;
 
     @GetMapping()
+    @ApiOperation("Obter todos os estoques")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Estoque encontrado")})
     public ResponseEntity get() {
         List<Estoque> estoques = service.getEstoque();
         return ResponseEntity.ok(estoques.stream().map(EstoqueDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um estoque")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Estoque encontrado"),
+            @ApiResponse(code = 404, message = "Estoque não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
         Optional<Estoque> estoque = service.getEstoqueById(id);
         if (!estoque.isPresent()) {
             return new ResponseEntity("Estoque não encontrado", HttpStatus.NOT_FOUND);
