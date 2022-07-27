@@ -46,6 +46,10 @@ public class EstoqueController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um estoque")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Estoque criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar estoque")})
     public ResponseEntity post(EstoqueDTO dto) {
         try {
             Estoque estoque = converter(dto);
@@ -57,6 +61,10 @@ public class EstoqueController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar um estoque")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Estoque alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar estoque")})
     public ResponseEntity atualizar(@PathVariable("id") Long id, EstoqueDTO dto) {
         if (!service.getEstoqueById(id).isPresent()) {
             return new ResponseEntity("Estoque não encontrado", HttpStatus.NOT_FOUND);
@@ -72,6 +80,11 @@ public class EstoqueController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Apagar um estoque")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Estoque excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir estoque"),
+            @ApiResponse(code = 404, message = "Estoque não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Estoque> estoque = service.getEstoqueById(id);
         if (!estoque.isPresent()) {
