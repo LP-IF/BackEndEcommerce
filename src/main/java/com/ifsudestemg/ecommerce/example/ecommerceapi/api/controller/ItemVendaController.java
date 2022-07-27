@@ -8,6 +8,7 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.service.PagamentoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ProdutoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.VendaService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class ItemVendaController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Item de venda encontrado"),
             @ApiResponse(code = 404, message = "Item de venda não encontrado")})
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Item de venda") Long id) {
         Optional<ItemVenda> itemVenda = itemVendaService.getItemVendaById(id);
         if (!itemVenda.isPresent()) {
             return new ResponseEntity("Item Venda não encontrado", HttpStatus.NOT_FOUND);
@@ -77,7 +78,7 @@ public class ItemVendaController {
     @ApiResponses({
             @ApiResponse(code = 202, message = "Item de venda alterado com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao alterar um item de venda")})
-    public ResponseEntity atualizar(@PathVariable("id") Long id, ItemVendaDTO dto) {
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("Id do Item de venda") Long id, ItemVendaDTO dto) {
         if (!itemVendaService.getItemVendaById(id).isPresent()) {
             return new ResponseEntity("Item de Venda não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -103,7 +104,7 @@ public class ItemVendaController {
             @ApiResponse(code = 201, message = "Item de venda excluido com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao excluir item de venda"),
             @ApiResponse(code = 404, message = "Item de venda não encontrado")})
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Item de venda") Long id) {
         Optional<ItemVenda> itemVenda = itemVendaService.getItemVendaById(id);
         if (!itemVenda.isPresent()) {
             return new ResponseEntity("Item Venda não encontrado", HttpStatus.NOT_FOUND);
