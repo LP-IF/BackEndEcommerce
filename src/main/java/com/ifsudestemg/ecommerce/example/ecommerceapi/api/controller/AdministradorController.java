@@ -47,7 +47,7 @@ public class AdministradorController {
     }
 
     @PostMapping()
-    @ApiOperation("Obter detalhes de um administrador")
+    @ApiOperation("Salvar um administrador")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Administrador criado com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao salvar administrador")})
@@ -62,7 +62,7 @@ public class AdministradorController {
     }
 
     @PutMapping("{id}")
-    @ApiOperation("Obter detalhes de um administrador")
+    @ApiOperation("Alterar um administrador")
     @ApiResponses({
             @ApiResponse(code = 202, message = "Administrador alterado com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao alterar administrador")})
@@ -81,7 +81,7 @@ public class AdministradorController {
     }
 
     @DeleteMapping("{id}")
-    @ApiOperation("Obter detalhes de um administrador")
+    @ApiOperation("Apagar um administrador")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Administrador excluido com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao excluir administrador"),
