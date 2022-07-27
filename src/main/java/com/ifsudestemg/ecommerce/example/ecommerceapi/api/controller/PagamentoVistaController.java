@@ -4,6 +4,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.api.dto.PagamentoVistaDTO;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.PagamentoVista;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.PagamentoVistaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -21,13 +25,20 @@ public class PagamentoVistaController {
     private final PagamentoVistaService service;
 
     @GetMapping()
+    @ApiOperation("Obter todos os pagamento a vistaes")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Pagamento a vista encontrado")})
     public ResponseEntity get() {
         List<PagamentoVista> pagamentoVistas = service.getPagamentoVista();
         return ResponseEntity.ok(pagamentoVistas.stream().map(PagamentoVistaDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um pagamento a vista")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Pagamento a vista encontrado"),
+            @ApiResponse(code = 404, message = "Pagamento a vista não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Pagamento a vista") Long id) {
         Optional<PagamentoVista> pagamentoVista = service.getPagamentoVistaById(id);
         if (!pagamentoVista.isPresent()) {
             return new ResponseEntity("Pagamento à Vista não encontrado", HttpStatus.NOT_FOUND);
@@ -36,6 +47,10 @@ public class PagamentoVistaController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um pagamento a vista")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Pagamento a vista criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar pagamento a vista")})
     public ResponseEntity post(PagamentoVistaDTO dto) {
         try {
             PagamentoVista pagamentoVista = converter(dto);
@@ -47,7 +62,11 @@ public class PagamentoVistaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, PagamentoVistaDTO dto) {
+    @ApiOperation("Alterar um pagamento a vista")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Pagamento a vista alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar pagamento a vista")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("Id do Pagamento a vista") Long id, PagamentoVistaDTO dto) {
         if (!service.getPagamentoVistaById(id).isPresent()) {
             return new ResponseEntity("PagamentoVista não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -62,7 +81,12 @@ public class PagamentoVistaController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Apagar um pagamento a vista")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Pagamento a vista excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir pagamento a vista"),
+            @ApiResponse(code = 404, message = "Pagamento a vista não encontrado")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Pagamento a vista") Long id) {
         Optional<PagamentoVista> pagamentoVista = service.getPagamentoVistaById(id);
         if (!pagamentoVista.isPresent()) {
             return new ResponseEntity("PagamentoVista não encontrado", HttpStatus.NOT_FOUND);
