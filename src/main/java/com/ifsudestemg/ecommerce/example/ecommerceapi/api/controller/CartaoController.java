@@ -6,6 +6,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cliente;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.CartaoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ClienteService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -25,13 +29,20 @@ public class CartaoController {
     private final ClienteService clienteService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os cartões")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cartão encontrado")})
     public ResponseEntity get() {
         List<Cartao> cartoes = cartaoService.getCartao();
         return ResponseEntity.ok(cartoes.stream().map(CartaoDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um cartão")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cartão encontrado"),
+            @ApiResponse(code = 404, message = "Cartão não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("id do cartão") Long id) {
         Optional<Cartao> cartao = cartaoService.getCartaoById(id);
         if (!cartao.isPresent()) {
             return new ResponseEntity("Cartao não encontrado", HttpStatus.NOT_FOUND);
@@ -40,6 +51,10 @@ public class CartaoController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um cartão")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cartão criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar cartão")})
     public ResponseEntity post(CartaoDTO dto) {
         try {
             Cartao cartao = converter(dto);
@@ -53,7 +68,11 @@ public class CartaoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, CartaoDTO dto) {
+    @ApiOperation("Alterar um cartão")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Cartão alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar cartão")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("id do cartão") Long id, CartaoDTO dto) {
         if (!cartaoService.getCartaoById(id).isPresent()) {
             return new ResponseEntity("Cartao não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -70,7 +89,12 @@ public class CartaoController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Apagar um cartão")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cartão excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir cartão"),
+            @ApiResponse(code = 404, message = "Cartão não encontrado")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Cartão") Long id) {
         Optional<Cartao> cartao = cartaoService.getCartaoById(id);
         if (!cartao.isPresent()) {
             return new ResponseEntity("Cartao não encontrado", HttpStatus.NOT_FOUND);

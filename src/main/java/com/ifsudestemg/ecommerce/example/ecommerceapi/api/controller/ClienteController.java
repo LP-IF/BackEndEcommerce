@@ -5,6 +5,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Cliente;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ClienteService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +26,20 @@ public class ClienteController {
     private final LoginService loginService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os clientes")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cliente encontrado")})
     public ResponseEntity get() {
         List<Cliente> clientes = service.getCliente();
         return ResponseEntity.ok(clientes.stream().map(ClienteDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um cliente")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Cliente encontrado"),
+            @ApiResponse(code = 404, message = "Cliente não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("id do cliente") Long id) {
         Optional<Cliente> cliente = service.getClienteById(id);
         if (!cliente.isPresent()) {
             return new ResponseEntity("Cliente não encontrado", HttpStatus.NOT_FOUND);
@@ -37,6 +48,10 @@ public class ClienteController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um cliente")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cliente criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar cliente")})
     public ResponseEntity post(ClienteDTO dto) {
         try {
             Cliente cliente = converter(dto);
@@ -48,7 +63,11 @@ public class ClienteController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, ClienteDTO dto) {
+    @ApiOperation("Alterar um cliente")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Cliente alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar cliente")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("id do cliente") Long id, ClienteDTO dto) {
         if (!service.getClienteById(id).isPresent()) {
             return new ResponseEntity("Cliente não encontrado", HttpStatus.NOT_FOUND);
         }
@@ -63,7 +82,12 @@ public class ClienteController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Apagar um cliente")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Cliente excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir cliente"),
+            @ApiResponse(code = 404, message = "Cliente não encontrado")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do cliente") Long id) {
         Optional<Cliente> cliente = service.getClienteById(id);
         if (!cliente.isPresent()) {
             return new ResponseEntity("Cliente não encontrado", HttpStatus.NOT_FOUND);

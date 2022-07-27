@@ -6,6 +6,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Fornecedor;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.CompraProdutoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.FornecedorService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,13 +28,20 @@ public class CompraProdutoController {
     private final FornecedorService fornecedorService;
 
     @GetMapping()
+    @ApiOperation("Obter todas as compras")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Compra encontrada")})
     public ResponseEntity get() {
         List<CompraProduto> compraProdutos = compraProdutoService.getCompraProduto();
         return ResponseEntity.ok(compraProdutos.stream().map(CompraProdutoDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de uma compra")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Compra encontrada"),
+            @ApiResponse(code = 404, message = "Compra não encontrada")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("id da compra") Long id) {
         Optional<CompraProduto> compraProduto = compraProdutoService.getCompraProdutoById(id);
         if (!compraProduto.isPresent()) {
             return new ResponseEntity("Compra Produto não encontrado", HttpStatus.NOT_FOUND);
@@ -39,6 +50,10 @@ public class CompraProdutoController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar uma compra")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Compra criada com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar compra")})
     public ResponseEntity post(CompraProdutoDTO dto) {
         try {
             CompraProduto compraProduto = converter(dto);
@@ -52,9 +67,13 @@ public class CompraProdutoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, CompraProdutoDTO dto) {
+    @ApiOperation("Alterar uma compra")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Compra alterada com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar compra")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("id da compra") Long id, CompraProdutoDTO dto) {
         if (!compraProdutoService.getCompraProdutoById(id).isPresent()) {
-            return new ResponseEntity("CompraProduto não encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Compra não encontrada", HttpStatus.NOT_FOUND);
         }
         try {
             CompraProduto compraProduto = converter(dto);
@@ -69,10 +88,15 @@ public class CompraProdutoController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Apagar uma compra")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Compra excluída com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir compra"),
+            @ApiResponse(code = 404, message = "Compra não encontrada")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id da compra") Long id) {
         Optional<CompraProduto> compraProduto = compraProdutoService.getCompraProdutoById(id);
         if (!compraProduto.isPresent()) {
-            return new ResponseEntity("CompraProduto não encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Compra não encontrada", HttpStatus.NOT_FOUND);
         }
         try {
             compraProdutoService.excluir(compraProduto.get());
