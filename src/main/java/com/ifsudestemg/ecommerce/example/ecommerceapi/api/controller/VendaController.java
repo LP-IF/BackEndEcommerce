@@ -6,6 +6,10 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Venda;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.RegraNegocioException;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ClienteService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.VendaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,13 +28,20 @@ public class VendaController {
     private final ClienteService clienteService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os vendaes")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Venda encontrado")})
     public ResponseEntity get() {
         List<Venda> vendas = vendaService.getVenda();
         return ResponseEntity.ok(vendas.stream().map(VendaDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity get(@PathVariable("id") Long id) {
+    @ApiOperation("Obter detalhes de um venda")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Venda encontrado"),
+            @ApiResponse(code = 404, message = "Venda não encontrado")})
+    public ResponseEntity get(@PathVariable("id") @ApiParam("Id do Venda") Long id) {
         Optional<Venda> venda = vendaService.getVendaById(id);
         if (!venda.isPresent()) {
             return new ResponseEntity("Venda não encontrada", HttpStatus.NOT_FOUND);
@@ -39,6 +50,10 @@ public class VendaController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um venda")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Venda criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar venda")})
     public ResponseEntity post(VendaDTO dto) {
         try {
             Venda venda = converter(dto);
@@ -52,7 +67,11 @@ public class VendaController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity atualizar(@PathVariable("id") Long id, VendaDTO dto) {
+    @ApiOperation("Alterar um venda")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Venda alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar venda")})
+    public ResponseEntity atualizar(@PathVariable("id") @ApiParam("Id do Venda") Long id, VendaDTO dto) {
         if (!vendaService.getVendaById(id).isPresent()) {
             return new ResponseEntity("Venda não encontrada", HttpStatus.NOT_FOUND);
         }
@@ -69,7 +88,12 @@ public class VendaController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity excluir(@PathVariable("id") Long id) {
+    @ApiOperation("Apagar um venda")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Venda excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir venda"),
+            @ApiResponse(code = 404, message = "Venda não encontrado")})
+    public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Venda") Long id) {
         Optional<Venda> venda = vendaService.getVendaById(id);
         if (!venda.isPresent()) {
             return new ResponseEntity("Venda não encontrado", HttpStatus.NOT_FOUND);
