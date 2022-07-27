@@ -7,6 +7,9 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ItemVendaService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.PagamentoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.ProdutoService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.VendaService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -27,12 +30,19 @@ public class ItemVendaController {
     private final VendaService vendaService;
 
     @GetMapping()
+    @ApiOperation("Obter todos os item de vendas")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Item de venda encontrado")})
     public ResponseEntity get() {
         List<ItemVenda> itemVendas = itemVendaService.getItemVenda();
         return ResponseEntity.ok(itemVendas.stream().map(ItemVendaDTO::create).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Obter detalhes de um item de venda")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Item de venda encontrado"),
+            @ApiResponse(code = 404, message = "Item de venda não encontrado")})
     public ResponseEntity get(@PathVariable("id") Long id) {
         Optional<ItemVenda> itemVenda = itemVendaService.getItemVendaById(id);
         if (!itemVenda.isPresent()) {
@@ -42,6 +52,10 @@ public class ItemVendaController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um item de venda")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Item de venda criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar um item de venda")})
     public ResponseEntity post(ItemVendaDTO dto) {
         try {
             ItemVenda itemVenda = converter(dto);
@@ -59,9 +73,13 @@ public class ItemVendaController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar um item de venda")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Item de venda alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar um item de venda")})
     public ResponseEntity atualizar(@PathVariable("id") Long id, ItemVendaDTO dto) {
         if (!itemVendaService.getItemVendaById(id).isPresent()) {
-            return new ResponseEntity("ItemVenda não encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Item de Venda não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             ItemVenda itemVenda = converter(dto);
@@ -80,10 +98,15 @@ public class ItemVendaController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Apagar um item de venda")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Item de venda excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir item de venda"),
+            @ApiResponse(code = 404, message = "Item de venda não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<ItemVenda> itemVenda = itemVendaService.getItemVendaById(id);
         if (!itemVenda.isPresent()) {
-            return new ResponseEntity("ItemVenda não encontrado", HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Item Venda não encontrado", HttpStatus.NOT_FOUND);
         }
         try {
             itemVendaService.excluir(itemVenda.get());
