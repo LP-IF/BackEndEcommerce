@@ -50,6 +50,10 @@ public class ItemCompraController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um item compra")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Item compra criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar item compra")})
     public ResponseEntity post(ItemCompraDTO dto) {
         try {
             ItemCompra itemCompra = converter(dto);
@@ -63,6 +67,10 @@ public class ItemCompraController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar um item compra")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Item compra alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar item compra")})
     public ResponseEntity atualizar(@PathVariable("id") Long id, ItemCompraDTO dto) {
         if (!service.getItemCompraById(id).isPresent()) {
             return new ResponseEntity("ItemCompra não encontrado", HttpStatus.NOT_FOUND);
@@ -80,6 +88,11 @@ public class ItemCompraController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Apagar um item compra")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Item compra excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir item compra"),
+            @ApiResponse(code = 404, message = "Item compra não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<ItemCompra> itemCompra = service.getItemCompraById(id);
         if (!itemCompra.isPresent()) {
