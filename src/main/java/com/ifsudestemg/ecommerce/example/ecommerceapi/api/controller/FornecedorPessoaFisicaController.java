@@ -47,6 +47,10 @@ public class FornecedorPessoaFisicaController {
     }
 
     @PostMapping()
+    @ApiOperation("Salvar um fornecedor pessoa física")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Fornecedor pessoa física criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar fornecedor pessoa física")})
     public ResponseEntity post(FornecedorPessoaFisicaDTO dto) {
         try {
             FornecedorPessoaFisica fornecedorPessoaFisica = converter(dto);
@@ -58,6 +62,10 @@ public class FornecedorPessoaFisicaController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar um fornecedor pessoa física")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Fornecedor pessoa física alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar fornecedor pessoa física")})
     public ResponseEntity atualizar(@PathVariable("id") Long id, FornecedorPessoaFisicaDTO dto) {
         if (!service.getFornecedorPessoaFisicaById(id).isPresent()) {
             return new ResponseEntity("FornecedorPessoaFisica não encontrado", HttpStatus.NOT_FOUND);
@@ -73,6 +81,11 @@ public class FornecedorPessoaFisicaController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Apagar um fornecedor pessoa física")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Fornecedor pessoa física excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir fornecedor pessoa física"),
+            @ApiResponse(code = 404, message = "Fornecedor pessoa física não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<FornecedorPessoaFisica> fornecedorPessoaFisica = service.getFornecedorPessoaFisicaById(id);
         if (!fornecedorPessoaFisica.isPresent()) {
