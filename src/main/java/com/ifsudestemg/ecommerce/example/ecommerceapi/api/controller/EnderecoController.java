@@ -49,6 +49,10 @@ public class EnderecoController {
         return ResponseEntity.ok(endereco.map(EnderecoDTO::create));
     }
     @PostMapping()
+    @ApiOperation("Salvar um endereço")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Endereço criado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao salvar endereço")})
     public ResponseEntity post(EnderecoDTO dto) {
         try {
             Endereco endereco = converter(dto);
@@ -62,6 +66,10 @@ public class EnderecoController {
     }
 
     @PutMapping("{id}")
+    @ApiOperation("Alterar um endereço")
+    @ApiResponses({
+            @ApiResponse(code = 202, message = "Endereço alterado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao alterar endereço")})
     public ResponseEntity atualizar(@PathVariable("id") Long id, EnderecoDTO dto) {
         if (!enderecoService.getEnderecoById(id).isPresent()) {
             return new ResponseEntity("Endereco não encontrado", HttpStatus.NOT_FOUND);
@@ -79,6 +87,11 @@ public class EnderecoController {
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Apagar um endereço")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Endereço excluido com sucesso"),
+            @ApiResponse(code = 400, message = "Erro ao excluir endereço"),
+            @ApiResponse(code = 404, message = "Enderço não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") Long id) {
         Optional<Endereco> endereco = enderecoService.getEnderecoById(id);
         if (!endereco.isPresent()) {
