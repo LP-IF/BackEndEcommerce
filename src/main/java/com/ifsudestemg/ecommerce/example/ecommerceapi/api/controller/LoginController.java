@@ -6,6 +6,9 @@ import com.ifsudestemg.ecommerce.example.ecommerceapi.exception.SenhaInvalidaExc
 import com.ifsudestemg.ecommerce.example.ecommerceapi.model.entity.Login;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.security.JwtService;
 import com.ifsudestemg.ecommerce.example.ecommerceapi.service.LoginService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +36,10 @@ public class LoginController {
 
 
     @PostMapping("/auth")
+    @ApiOperation("Autenticação de login")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "login autenticado com sucesso"),
+            @ApiResponse(code = 401, message = "Login não autorizado")})
     public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais){
         try{
             Login login = Login.builder()

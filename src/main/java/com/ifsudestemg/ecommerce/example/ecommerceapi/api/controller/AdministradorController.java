@@ -83,7 +83,7 @@ public class AdministradorController {
     @DeleteMapping("{id}")
     @ApiOperation("Apagar um administrador")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Administrador excluido com sucesso"),
+            @ApiResponse(code = 204, message = "Administrador excluido com sucesso"),
             @ApiResponse(code = 400, message = "Erro ao excluir administrador"),
             @ApiResponse(code = 404, message = "Administrador não encontrado")})
     public ResponseEntity excluir(@PathVariable("id") @ApiParam("Id do Administrador") Long id) {
