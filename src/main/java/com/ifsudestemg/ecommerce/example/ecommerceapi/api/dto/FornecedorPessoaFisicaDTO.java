@@ -19,7 +19,6 @@ public class FornecedorPessoaFisicaDTO {
     private String nome;
     private String telefone;
     private String email;
-    private String senha;
     private Long loginId;
 
     public static FornecedorPessoaFisicaDTO create(FornecedorPessoaFisica fornecedor){

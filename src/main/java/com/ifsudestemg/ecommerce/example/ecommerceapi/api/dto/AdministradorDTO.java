@@ -20,7 +20,6 @@ public class AdministradorDTO {
     private String nome;
     private String telefone;
     private String email;
-    private String senha;
     private Long loginId;
     public static AdministradorDTO create(Administrador administrador){
         ModelMapper modelMapper = new ModelMapper();

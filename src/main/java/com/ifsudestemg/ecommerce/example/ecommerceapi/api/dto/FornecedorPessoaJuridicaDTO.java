@@ -18,7 +18,6 @@ public class FornecedorPessoaJuridicaDTO {
     private String nome;
     private String telefone;
     private String email;
-    private String senha;
 
     private String cnpj;
     private String nomeRepresentante;
